@@ -3,9 +3,12 @@ import { useAuth } from "../../contexts/AuthDialogContext";
 import { useModal } from "../../contexts/ModalContext";
 import Button from "../Header/Button";
 import InputField from "../InputField";
+import {Loader} from '../../components/Loader';
 import "./authentication.css";
 const Login = () => {
   // const { setAuthType, loginHandler, error } = useAuth();
+  const { loginHandler,isLoading,error,setAuthType } = useAuth();
+
   const [loginCredentials, setLoginCredentials] = useState({
     email: "",
     password: "",
@@ -30,11 +33,12 @@ const Login = () => {
     }));
   };
 
-  // const loginUser = async () => {
-  //   // e.preventDefault();
-  //   const success = await loginHandler(loginCredentials);
-  //   if (success) hideModal();
-  // };
+  const loginUser = async () => {
+    // e.preventDefault();
+    const success = await loginHandler(loginCredentials);
+    if (success) hideModal();
+    console.log("modal hidden");
+  };
 
   return (
     <div className="auth-body">
@@ -67,17 +71,18 @@ const Login = () => {
           showTogglePasswordButton = {true}
         />
         <div className="card-action-btn-container flex-column">
-          {/* {error.errorExists && (
+          {error.errorExists && (
             <p className="body-typo-sm invalid-field-color text-bold-weight ">
               {error.errorMessage}
             </p>
-          )} */}
-          {/* <Button buttonText="Login" onClick={() => loginUser()} /> */}
+          )}
+          {isLoading && <Loader />}
+          <Button buttonText="Login" onClick={() => loginUser()} />
           <Button
             buttonText="Create new account"
             buttonStyle="secondary-button margin-top-0"
-            // icon="fas fa-chevron-right"
-            // onClick={() => setAuthType("signup")}
+            icon="fas fa-chevron-right"
+            onClick={() => setAuthType("signup")}
           />
           <Button
             buttonText="Login with test credenials"

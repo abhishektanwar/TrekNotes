@@ -12,7 +12,7 @@ const ModalWrapper = ({children}:reactChildren) =>{
     }
   }
 
-  return true ? (
+  return isModalVisible ? (
     <div className="modal-background" ref={modalRef} onClick={closeModal}>
       {children}
       <button className="modal-close-button" onClick={()=>hideModal()}>X</button>
