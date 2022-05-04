@@ -1,4 +1,4 @@
-import React from "react";
+import React,{FC} from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./screens/LandingPage";
 
 
-function App() {
+const App:FC = () => {
   return (
     <div className="App">
       {/* <Mockman /> */}

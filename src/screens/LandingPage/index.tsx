@@ -15,8 +15,9 @@ const LandingPage: React.FC = () => {
               Remember everything and tackle any project with your notes, tasks,
               and schedule all in one place.
             </h4>
-            <Button buttonText={"Join Now"} buttonStyle={"typo-sm"} />
+            <Button onClick={()=>{}} buttonText={"Join Now"} buttonStyle={"typo-sm"} />
             <Button
+              onClick={()=>{}}
               buttonText={"Already have an account ?"}
               buttonStyle={"typo-sm secondary-button primary-color"}
             />

@@ -6,7 +6,6 @@ import InputField from "../InputField";
 import {Loader} from '../../components/Loader';
 import "./authentication.css";
 const Login = () => {
-  // const { setAuthType, loginHandler, error } = useAuth();
   const { loginHandler,isLoading,error,setAuthType } = useAuth();
 
   const [loginCredentials, setLoginCredentials] = useState({
@@ -34,7 +33,6 @@ const Login = () => {
   };
 
   const loginUser = async () => {
-    // e.preventDefault();
     const success = await loginHandler(loginCredentials);
     if (success) hideModal();
     console.log("modal hidden");
@@ -87,7 +85,7 @@ const Login = () => {
           <Button
             buttonText="Login with test credenials"
             buttonStyle="secondary-button body-typo-md margin-top-0"
-            // icon="fas fa-chevron-right"
+            icon="fas fa-chevron-right"
             onClick={() => setLoginCredentials({email:"adarshbalika@gmail.com",password:"adarshBalika123"})}
           />
         </div>
