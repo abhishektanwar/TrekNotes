@@ -2,7 +2,12 @@ import React from "react";
 import Button from "../../components/Header/Button";
 import utils from "../../utils";
 import { contentData } from "./data";
+import {useAuth} from '../../contexts/AuthDialogContext'
+import {useModal} from '../../contexts/ModalContext'
+
 const LandingPage: React.FC = () => {
+  const { setAuthType, logoutHandler, user } = useAuth();
+  const { showModal } = useModal();
   return (
     <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
       <div className="grid-2-column-layout margin-top-60">
@@ -15,9 +20,15 @@ const LandingPage: React.FC = () => {
               Remember everything and tackle any project with your notes, tasks,
               and schedule all in one place.
             </h4>
-            <Button onClick={()=>{}} buttonText={"Join Now"} buttonStyle={"typo-sm"} />
+            <Button onClick={()=>{
+              setAuthType('signup');
+              showModal();
+            }} buttonText={"Join Now"} buttonStyle={"typo-sm"} />
             <Button
-              onClick={()=>{}}
+              onClick={()=>{
+                setAuthType('login');
+                showModal();
+              }}
               buttonText={"Already have an account ?"}
               buttonStyle={"typo-sm secondary-button primary-color"}
             />
