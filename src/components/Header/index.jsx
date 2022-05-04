@@ -1,8 +1,6 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthDialogContext";
 import { useModal } from "../../contexts/ModalContext";
-// import { useWishlist } from "../../Contexts/WishlistContext";
 import BadgeIconButton from "./BadgeIconButton";
 import Button from "./Button";
 import Logo from "./Logo";
