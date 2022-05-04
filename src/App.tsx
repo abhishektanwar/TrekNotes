@@ -6,6 +6,7 @@ import { ModalProvider } from "./contexts/ModalContext";
 import { AuthProvider } from "./contexts/AuthDialogContext";
 import { Loader } from "./components/Loader";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./screens/LandingPage";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
             <Header />
           </nav>
           <Routes>
-            <Route path="/" element={<Loader />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </AuthProvider>
       </ModalProvider>

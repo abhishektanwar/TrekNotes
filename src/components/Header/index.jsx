@@ -1,13 +1,14 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthDialogContext";
 import { useModal } from "../../contexts/ModalContext";
 // import { useWishlist } from "../../Contexts/WishlistContext";
 import BadgeIconButton from "./BadgeIconButton";
 import Button from "./Button";
-import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import {ReactComponent as MobileLogo} from '../../assets/images/logo/logo.svg';
+import {ReactComponent as DetailedLogo} from './TREK-NOTES-LOGO.svg';
+
 
 const Header = () => {
   const { setAuthType, logoutHandler, user } = useAuth();
@@ -19,13 +20,13 @@ const Header = () => {
   };
   return (
     <>
-      {/* <Link to="/">
-          <Logo />
+      <Link to="/">
+          <DetailedLogo />
         <span className="show-mobile-logo">
           <MobileLogo />
         </span>
-      </Link> */}
-      {/* <SearchBar /> */}
+      </Link>
+      <SearchBar />
       <div className="nav-section">
 
         <Button
