@@ -93,7 +93,7 @@ const SignUp :React.FC = () => {
             <Button
               buttonText="Already have an account ?"
               buttonStyle="secondary-button"
-              // icon="fas fa-chevron-right"
+              icon="fas fa-chevron-right"
               onClick={() => setAuthType("login")}
             />
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{FC} from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
@@ -6,9 +6,10 @@ import { ModalProvider } from "./contexts/ModalContext";
 import { AuthProvider } from "./contexts/AuthDialogContext";
 import { Loader } from "./components/Loader";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./screens/LandingPage";
 
 
-function App() {
+const App:FC = () => {
   return (
     <div className="App">
       {/* <Mockman /> */}
@@ -19,7 +20,7 @@ function App() {
             <Header />
           </nav>
           <Routes>
-            <Route path="/" element={<Loader />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </AuthProvider>
       </ModalProvider>

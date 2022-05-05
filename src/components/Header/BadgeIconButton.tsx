@@ -1,6 +1,12 @@
 import React from "react";
 
-const BadgeIconButton = (props) => {
+interface BadgeIconButtonTypes{
+  badgeNumber:number
+  icon:string
+  badgeIconButtonWrapper:string
+  onClick:()=>void
+}
+const BadgeIconButton:React.FC<BadgeIconButtonTypes> = (props) => {
   const { badgeNumber, icon, badgeIconButtonWrapper, onClick } = props;
   return (
     <div>
