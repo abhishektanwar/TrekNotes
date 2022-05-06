@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import Login from "../../components/Authentication/Login";
 import SignUp from "../../components/Authentication/SignUp";
 import ModalWrapper from "../../components/ModalWrapper";
@@ -18,7 +19,7 @@ const AuthProvider = (props: any) => {
     isAuthenticated: false,
     encodedToken: "",
   });
-
+  const navigate = useNavigate();
   const loginHandler = async (user: any) => {
     setIsLoading(true);
     try {
@@ -36,6 +37,7 @@ const AuthProvider = (props: any) => {
           encodedToken: result.data.encodedToken,
         });
         customToast("Logged in Successfully", "success");
+        navigate('/home');
         return true;
       }
     } catch (e) {

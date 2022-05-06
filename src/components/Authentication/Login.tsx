@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthDialogContext";
 import { useModal } from "../../contexts/ModalContext";
-import Button from "../Header/Button";
+import Button from "../Buttons/Button";
 import InputField from "../InputField";
 import {Loader} from '../../components/Loader';
 import "./authentication.css";

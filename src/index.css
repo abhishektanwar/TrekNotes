@@ -2,6 +2,13 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.main-container{
+  display: grid;
+  grid-template-columns: 10vw 90vw;
+  overflow-x: hidden;
+  
+}
+
 .secondary-button{
   background-color: unset;
   color: black;

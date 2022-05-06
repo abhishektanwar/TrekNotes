@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../components/Header/Button";
+import Button from "../../components/Buttons/Button";
 import utils from "../../utils";
 import { contentData } from "./data";
 import {useAuth} from '../../contexts/AuthDialogContext'

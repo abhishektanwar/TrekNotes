@@ -1,12 +1,13 @@
 import React from "react";
 import { useAuth } from "../../contexts/AuthDialogContext";
 import { useModal } from "../../contexts/ModalContext";
-import BadgeIconButton from "./BadgeIconButton";
-import Button from "./Button";
+import BadgeIconButton from "../Buttons/BadgeIconButton";
+// import Button from "./Buttons/Button";
 import SearchBar from "./SearchBar";
 import {ReactComponent as MobileLogo} from '../../assets/images/logo/logo.svg';
 import {ReactComponent as DetailedLogo} from './TREK-NOTES-LOGO.svg';
 import {Link} from 'react-router-dom'
+import Button from "../Buttons/Button";
 
 const Header = () => {
   const { setAuthType, logoutHandler, user } = useAuth();
