@@ -15,7 +15,7 @@ const HomePage: FC = () => {
       <div style={{width:'80%',margin:'auto',display:'flex',justifyContent:'flex-start',flexWrap:'wrap'}}>
         {allNotes.map((note: any) => {
           return (
-            <Note noteTitle={note.noteTitle} text={note.text} id={note._id} />
+            <Note noteTitle={note.noteTitle} text={note.text} id={note._id} priority={note.priority} bgColor={note.noteBgColor} labels={note.labels} />
           );
         })}
 
@@ -30,8 +30,9 @@ export default HomePage;
 // loader on add note : done 
 //1 add functionality to add note : done
 //2 list notes : done
-//3 add label, color, priority, date functionality
+//3 add label, color, priority, date functionality : date functionality left
 //4 refactor add note functionality to check empty field and trims
 //5 create filter compoenent
 //6 add alerts for empty title,empty body,empty label,discard unsaved note error
-// sorting and searching
+// refactor individual note component (render HTML)
+//7 sorting and searching

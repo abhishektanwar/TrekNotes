@@ -19,11 +19,12 @@ interface AddColorComponentType {
 
 interface AddLabelComponentType{
   handleNoteDetailUpdate:(id:string,value:any) => void
+  labels:string[]
 }
 
-const AddLabelComponent: FC<AddLabelComponentType> = ({handleNoteDetailUpdate}) => {
+const AddLabelComponent: FC<AddLabelComponentType> = ({handleNoteDetailUpdate,labels}) => {
   const [newNoteLabel, setNewNoteLabel] = useState("");
-  const [labels,setLabelsLocal] = useState<string[]>([]);
+  // const [labels,setLabelsLocal] = useState<string[]>([]);
   return (
     <div style={{position:'absolute',display:'flex',border:'1px solid black',left:'20px',padding:'10px'}}>
       <InputField
@@ -37,8 +38,11 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({handleNoteDetailUpdate}) 
         name="new-note-label"
         customClass="add-label-input-field"
       />
-      {/* TODO FIX ME */}
-      <Button buttonText="Add" onClick={()=>setLabelsLocal([...labels,newNoteLabel])} buttonStyle="btn-outline-primary add-label-button" />
+      <Button buttonText="Add" onClick={()=>{
+        handleNoteDetailUpdate("labels",[...labels,newNoteLabel])
+        setNewNoteLabel('')
+      }}
+      buttonStyle="btn-outline-primary add-label-button" />
     </div>
   );
 };
@@ -140,6 +144,7 @@ const NewNote: FC = () => {
   const [isAddNoteLoading, setIsAddNoteLoading] = useState(false);
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
   const [showAddLabelComponent, setShowAddLabelComponent] = useState(false);
+  const [labels,setLabelsLocal] = useState<string[]>([]);
   const toolbarModules = {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -207,7 +212,7 @@ const NewNote: FC = () => {
             <span onClick={() => setShowAddColorComponent((prev) => !prev)}>
               <ColorPaletteIcon />
             </span>
-            {showAddLabelComponent && <AddLabelComponent handleNoteDetailUpdate={handleNoteDetailUpdate} />}
+            {showAddLabelComponent && <AddLabelComponent handleNoteDetailUpdate={handleNoteDetailUpdate} labels={newNote.labels} />}
             <span onClick={() => setShowAddLabelComponent((prev) => !prev)}>
               <NewLabelIcon  />
             </span>
@@ -224,6 +229,7 @@ const NewNote: FC = () => {
               <option>Medium</option>
               <option>High</option>
             </select>
+            {newNote.labels.map((label:any)=>label)}
           </div>
           <div className="utility-action-btns-right">
             <span onClick={handleAddNote}>
@@ -238,3 +244,6 @@ const NewNote: FC = () => {
 };
 
 export default NewNote;
+
+
+// handleNoteDetailUpdate({...prev,allLabels;[...]})
