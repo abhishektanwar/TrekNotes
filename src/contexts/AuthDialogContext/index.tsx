@@ -85,6 +85,14 @@ const AuthProvider = (props: any) => {
     setUser({ isAuthenticated: false, encodedToken: "" });
   };
 
+  useEffect(()=>{
+    const trekNotesAuthToken = utils.getLocalStorage('trek-notes-authToken');
+    if(trekNotesAuthToken){
+      setUser({isAuthenticated:true,encodedToken:trekNotesAuthToken})
+      console.log("used Effect logged in")
+    }
+  },[])
+
   return (
     <AuthContext.Provider
       value={{

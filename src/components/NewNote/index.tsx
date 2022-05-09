@@ -10,123 +10,8 @@ import "./new-note.css";
 import { useNotes } from "../../contexts/NotesContext";
 import useNotesApiCalls from "../../hooks/useNotesApiCalls";
 import { Loader } from "../Loader";
-import Button from "../Buttons/Button";
-
-interface AddColorComponentType {
-  handleNoteDetailUpdate: (id: string, value: any) => void;
-  setShowAddColorComponent: (prev: boolean) => void;
-}
-
-interface AddLabelComponentType{
-  handleNoteDetailUpdate:(id:string,value:any) => void
-  labels:string[]
-}
-
-const AddLabelComponent: FC<AddLabelComponentType> = ({handleNoteDetailUpdate,labels}) => {
-  const [newNoteLabel, setNewNoteLabel] = useState("");
-  // const [labels,setLabelsLocal] = useState<string[]>([]);
-  return (
-    <div style={{position:'absolute',display:'flex',border:'1px solid black',left:'20px',padding:'10px'}}>
-      <InputField
-        type="text"
-        id="labels"
-        value={newNoteLabel}
-        onChange={(e) => setNewNoteLabel(e.target.value)}
-        placeholder="Label..."
-        required
-        validation={true}
-        name="new-note-label"
-        customClass="add-label-input-field"
-      />
-      <Button buttonText="Add" onClick={()=>{
-        handleNoteDetailUpdate("labels",[...labels,newNoteLabel])
-        setNewNoteLabel('')
-      }}
-      buttonStyle="btn-outline-primary add-label-button" />
-    </div>
-  );
-};
-const AddColorComponent: FC<AddColorComponentType> = ({
-  handleNoteDetailUpdate,
-  setShowAddColorComponent,
-}) => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        border: "1px solid black",
-        height: "100px",
-        width: "120px",
-        zIndex: 10,
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "flex-start",
-        top: "36px",
-      }}
-    >
-      <div
-        style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "green",
-          margin: "auto",
-        }}
-        id="noteBgColor"
-        onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "green");
-          setShowAddColorComponent(false);
-        }}
-      ></div>
-      <div
-        style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "pink",
-          margin: "auto",
-        }}
-        id="noteBgColor"
-        onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "pink");
-          setShowAddColorComponent(false);
-        }}
-      />
-      <div
-        style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "blue",
-          margin: "auto",
-        }}
-        id="noteBgColor"
-        onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "blue");
-          setShowAddColorComponent(false);
-        }}
-      />
-      <div
-        style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "yellow",
-          margin: "auto",
-        }}
-        id="noteBgColor"
-        onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "yellow");
-          setShowAddColorComponent(false);
-        }}
-      />
-    </div>
-  );
-};
+import AddLabelComponent from "./AddLabelComponent";
+import AddColorComponent from "./AddColorComponent";
 
 const NewNote: FC = () => {
   const {
@@ -144,7 +29,6 @@ const NewNote: FC = () => {
   const [isAddNoteLoading, setIsAddNoteLoading] = useState(false);
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
   const [showAddLabelComponent, setShowAddLabelComponent] = useState(false);
-  const [labels,setLabelsLocal] = useState<string[]>([]);
   const toolbarModules = {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -245,6 +129,3 @@ const NewNote: FC = () => {
 };
 
 export default NewNote;
-
-
-// handleNoteDetailUpdate({...prev,allLabels;[...]})

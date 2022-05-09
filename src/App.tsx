@@ -27,10 +27,10 @@ const App: FC = () => {
           {user?.isAuthenticated && <AsideNav open={open} setOpen={setOpen} />}
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route element={<PrivateRoute />}>
+            {/* <Route element={<PrivateRoute />}> */}
               <Route path="/home" element={<HomePage />} />
 
-            </Route>
+            {/* </Route> */}
           </Routes>
         </div>
     </div>
