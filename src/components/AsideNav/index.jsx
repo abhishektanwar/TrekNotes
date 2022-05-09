@@ -36,7 +36,7 @@ const AsideNav = ({open,setOpen}) => {
         
       ):null}
         <Button
-          buttonText="Explore"
+          buttonText="Notes"
           buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/explore' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
@@ -46,7 +46,7 @@ const AsideNav = ({open,setOpen}) => {
           onClick={() => navigate("/explore")}
         />
         <Button
-          buttonText="Liked Videos"
+          buttonText="Label"
           buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/liked-videos' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
@@ -58,7 +58,7 @@ const AsideNav = ({open,setOpen}) => {
           }}
         />
         <Button
-          buttonText="Playlists"
+          buttonText="Archive"
           buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/playlists' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
@@ -70,7 +70,7 @@ const AsideNav = ({open,setOpen}) => {
           }}
         />
         <Button
-          buttonText="Watch Later"
+          buttonText="Trash"
           buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/watch-later' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
@@ -82,7 +82,7 @@ const AsideNav = ({open,setOpen}) => {
           }}
         />
         <Button
-          buttonText="History"
+          buttonText="Profile"
           buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/history' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>

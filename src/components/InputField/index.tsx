@@ -8,13 +8,15 @@ export interface InputFieldProps {
   name:string
   id:string
   placeholder:string
-  labelText:string
+  labelText?:string
   onChange : (e:any) => void
   value:string
   labelClass?:string
   required:boolean ,
   validation:boolean,
   showTogglePasswordButton?:boolean,
+  customClass?:string,
+  autoFocus?:boolean
 }
 const InputField: React.FC<InputFieldProps> = ({
   parentClass,
@@ -29,6 +31,8 @@ const InputField: React.FC<InputFieldProps> = ({
   required,
   validation,
   showTogglePasswordButton,
+  customClass="",
+  autoFocus
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -36,21 +40,23 @@ const InputField: React.FC<InputFieldProps> = ({
       className={`flex-column form-field-container ${parentClass}`}
       style={{ position: "relative" }}
     >
-      <label
+      {labelText && <label
         className={`input-label ${labelClass} ${
           !validation ? "invalid-field-color" : ""
         }`}
       >
         {labelText}
-      </label>
+      </label> }
+      
       <input
-        className={`form-field ${!validation ? "invalid-field-border" : ""}`}
+        className={`form-field ${customClass} ${!validation ? "invalid-field-border" : ""}`}
         type={showTogglePasswordButton && showPassword ? "text" : type}
         name={name}
         id={id}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        autoFocus={autoFocus}
         required={required ?? false}
       />
       {showTogglePasswordButton ? (

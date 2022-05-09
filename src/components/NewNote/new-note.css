@@ -1,0 +1,41 @@
+.new-note-main-container{
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.new-note-container{
+  padding: 20px;
+}
+
+.new-note-title-input-field{
+  border: none;
+}
+
+.new-note-title-input-field:hover{
+  border: none;
+}
+
+.new-note-utility-action-btns{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.new-note-utility-action-btns svg{
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.form-field{
+  width: unset;
+}
+
+.ql-toolbar.ql-snow{
+  display: flex;
+  justify-content: center;
+}
+
+.ql-container.ql-snow{
+  min-height: 10rem;
+}

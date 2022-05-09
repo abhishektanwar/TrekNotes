@@ -9,12 +9,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./screens/LandingPage";
 import HomePage from "./screens/HomePage";
 import AsideNav from "./components/AsideNav";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App: FC = () => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   return (
     <div className="App">
+      <ToastContainer theme="colored" autoClose={1200} />
       {/* <Mockman /> */}
       {/* <Router> */}
         {/* <ModalProvider> */}
