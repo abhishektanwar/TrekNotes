@@ -1,31 +1,12 @@
 import { FC } from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthDialogContext"
-import { useModal } from "../../contexts/ModalContext";
+import { Navigate, Outlet } from "react-router-dom";
+import utils from "../../utils";
 
 const PrivateRoute:FC = () => {
-  const {user,setAuthType} = useAuth();
-  const {showModal} = useModal();
-  const location = useLocation();
-  const loginHandler = () => {
-    if(!user.isAuthenticated){
-      setAuthType('login')
-      showModal()
-    }
+  const trekToken = utils.getLocalStorage('trek-notes-authToken')
 
-  }
-  return (
-    <>
-    {
-      user.isAuthenticated ? <Outlet /> : (
-        <>
-        <Navigate to="/" />
-        {loginHandler()}
-        </>
-      )
-    }
-    </>
-  )
+  return trekToken !== null ? <Outlet /> : <Navigate to="/" />
+
 }
 
 export default PrivateRoute
