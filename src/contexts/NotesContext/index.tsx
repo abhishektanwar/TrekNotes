@@ -16,7 +16,8 @@ const initialNoteDetails = {
   noteTitle: "",
   priority:"",
   noteBgColor:"",
-  labels:[]
+  labels:[],
+  date:new Date().toLocaleDateString()
 };
 const NotesContext = createContext<any>(initialNotesState);
 

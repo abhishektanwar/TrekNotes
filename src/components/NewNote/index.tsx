@@ -229,6 +229,7 @@ const NewNote: FC = () => {
               <option>Medium</option>
               <option>High</option>
             </select>
+            {newNote.date}
             {newNote.labels.map((label:any)=>label)}
           </div>
           <div className="utility-action-btns-right">

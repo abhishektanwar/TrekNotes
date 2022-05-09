@@ -11,6 +11,7 @@ import HomePage from "./screens/HomePage";
 import AsideNav from "./components/AsideNav";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App: FC = () => {
   const [open, setOpen] = useState(false);
@@ -19,9 +20,6 @@ const App: FC = () => {
     <div className="App">
       <ToastContainer theme="colored" autoClose={1200} />
       {/* <Mockman /> */}
-      {/* <Router> */}
-        {/* <ModalProvider> */}
-        {/* <AuthProvider> */}
         <nav className="nav-bar shadow-box" id="my-nav-bar">
           <Header />
         </nav>
@@ -29,13 +27,12 @@ const App: FC = () => {
           {user?.isAuthenticated && <AsideNav open={open} setOpen={setOpen} />}
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/home" element={<HomePage />} />
 
-            <Route path="/home" element={<HomePage />} />
+            </Route>
           </Routes>
         </div>
-        {/* </AuthProvider> */}
-        {/* </ModalProvider> */}
-      {/* </Router> */}
     </div>
   );
 };

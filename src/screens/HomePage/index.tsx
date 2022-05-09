@@ -12,13 +12,28 @@ const HomePage: FC = () => {
   return (
     <div>
       <NewNote />
-      <div style={{width:'80%',margin:'auto',display:'flex',justifyContent:'flex-start',flexWrap:'wrap'}}>
+      <div
+        style={{
+          width: "80%",
+          margin: "auto",
+          display: "flex",
+          justifyContent: "flex-start",
+          flexWrap: "wrap",
+        }}
+      >
         {allNotes.map((note: any) => {
           return (
-            <Note noteTitle={note.noteTitle} text={note.text} id={note._id} priority={note.priority} bgColor={note.noteBgColor} labels={note.labels} />
+            <Note
+              noteTitle={note.noteTitle}
+              text={note.text}
+              id={note._id}
+              priority={note.priority}
+              bgColor={note.noteBgColor}
+              labels={note.labels}
+              date={note.date}
+            />
           );
         })}
-
       </div>
     </div>
   );
@@ -27,7 +42,7 @@ export default HomePage;
 
 // fix quill css : done
 // create new note component : add utility buttons (color,label, add note and all) : done
-// loader on add note : done 
+// loader on add note : done
 //1 add functionality to add note : done
 //2 list notes : done
 //3 add label, color, priority, date functionality : date functionality left

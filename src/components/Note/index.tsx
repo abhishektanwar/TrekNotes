@@ -8,16 +8,18 @@ interface NoteType{
   priority:string
   labels:string[]
   bgColor:string
+  date:string
 }
 
 const Note:FC<NoteType> = (note) => {
-  const {noteTitle,text,id,priority,labels,bgColor} = note;
+  const {noteTitle,text,id,priority,labels,bgColor,date} = note;
   return (
     <div key={id} className="shadow-box note-container" style={{backgroundColor:bgColor}}>
       <h2>{noteTitle}</h2>
       <h3>{text}</h3>
       <h4>Priority:{priority}</h4>
       {labels.map((label)=><h6>{label}</h6>)}
+      <h4>Date:{date}</h4>
     </div>
   )
 }
