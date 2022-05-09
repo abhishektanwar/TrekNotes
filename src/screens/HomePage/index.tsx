@@ -14,7 +14,6 @@ const HomePage: FC = () => {
       <NewNote />
       <div style={{width:'80%',margin:'auto',display:'flex',justifyContent:'flex-start',flexWrap:'wrap'}}>
         {allNotes.map((note: any) => {
-          // console.log(note);
           return (
             <Note noteTitle={note.noteTitle} text={note.text} id={note._id} />
           );
@@ -28,8 +27,11 @@ export default HomePage;
 
 // fix quill css : done
 // create new note component : add utility buttons (color,label, add note and all) : done
-//3 create filter compoenent
-// add alerts for empty title,empty body,empty label,discard unsaved note error
-//1 add functionality to add note
-//2 list notes
-//4 sorting and searching
+// loader on add note : done 
+//1 add functionality to add note : done
+//2 list notes : done
+//3 add label, color, priority, date functionality
+//4 refactor add note functionality to check empty field and trims
+//5 create filter compoenent
+//6 add alerts for empty title,empty body,empty label,discard unsaved note error
+// sorting and searching

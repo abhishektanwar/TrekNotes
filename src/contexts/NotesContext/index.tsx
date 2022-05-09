@@ -14,6 +14,9 @@ const initialNotesState = {
 
 const initialNoteDetails = {
   noteTitle: "",
+  priority:"",
+  noteBgColor:"",
+  labels:[]
 };
 const NotesContext = createContext<any>(initialNotesState);
 
@@ -24,8 +27,8 @@ const NotesProvider = ({ children }: reactChildren) => {
   );
   const [newNote, setNewNote] = useState(initialNoteDetails);
   const [newNoteBodyText, setNewNoteBodyText] = useState("");
-  const handleNoteDetailUpdate = (e: any) => {
-    setNewNote((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  const handleNoteDetailUpdate = (id:string,value:any) => {
+    setNewNote((prev) => ({ ...prev, [id]: value }));
   };
 
   useEffect(() => {
