@@ -8,6 +8,7 @@ import { ModalProvider } from "./contexts/ModalContext";
 import { AuthProvider } from "./contexts/AuthDialogContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import { NotesProvider } from "./contexts/NotesContext";
+import { NotesFilterProvider } from "./contexts/FilterContext";
 // Call make Server
 makeServer();
 
@@ -17,7 +18,9 @@ ReactDOM.render(
       <ModalProvider>
         <AuthProvider>
           <NotesProvider>
-            <App />
+            <NotesFilterProvider>
+              <App />
+            </NotesFilterProvider>
           </NotesProvider>
         </AuthProvider>
       </ModalProvider>

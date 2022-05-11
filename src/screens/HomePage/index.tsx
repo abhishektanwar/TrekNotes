@@ -1,17 +1,25 @@
 import { FC } from "react";
+import Filter from "../../components/Filter";
 import { Loader } from "../../components/Loader";
 import NewNote from "../../components/NewNote";
 import Note from "../../components/Note";
-import { useNotes } from "../../contexts/NotesContext";
+import { useNotesFilter } from "../../contexts/FilterContext";
+import { NoteType, useNotes } from "../../contexts/NotesContext";
+import getFilteredNotes from "../../utils/FilterNotes/mainFilter";
+import sortByDate from "../../utils/FilterNotes/sortByDate";
 
 const HomePage: FC = () => {
   const {
-    notesData: { allNotes,allLabels },
+    notesData: { allNotes,allLabels },isFetchingNotes
   } = useNotes();
+  const {filterState} = useNotesFilter()
+  const finalFilteredNotes:NoteType[] = getFilteredNotes(allNotes,filterState)
 
   return (
+    isFetchingNotes ? <Loader /> :
     <div>
       <NewNote />
+      <Filter />
       <div
         style={{
           width: "80%",
@@ -21,7 +29,7 @@ const HomePage: FC = () => {
           flexWrap: "wrap",
         }}
       >
-        {allNotes.map((note: any) => {
+        {finalFilteredNotes.map((note: any) => {
           return (
             <Note
               noteTitle={note.noteTitle}
@@ -50,8 +58,15 @@ export default HomePage;
 //2 list notes : done
 //3 add label, color, priority, date functionality : done
 //4 refactor add note functionality to check empty field and trims : done
-//5 create filter compoenent
-//6 add alerts for empty title,empty body,empty label,discard unsaved note error
+//5 create filter compoenent : done
+//6 add alerts for empty title,empty body,empty label,discard unsaved note error : done
 // refactor individual note component (render HTML)
-//7 sorting and searching
+//7 sorting and searching, apply filters
 //8 add labels added to new note to allLabels context for filter dropdown : done
+// 9 handle discard note button : window confirm : done
+// 10 handle empty labels disabled button : done
+
+// date sort:done
+// label filter 
+// priority filter
+// search filter

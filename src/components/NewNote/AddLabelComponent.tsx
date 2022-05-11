@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { useToast } from "../../hooks/useToast";
 import Button from "../Buttons/Button";
 import InputField from "../InputField";
 
@@ -13,7 +12,6 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({
   labels,
 }) => {
   const [newNoteLabel, setNewNoteLabel] = useState("");
-  const { customToast } = useToast();
   // const [labels,setLabelsLocal] = useState<string[]>([]);
   return (
     <div
@@ -39,6 +37,7 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({
       <Button
         buttonText="Add"
         onClick={() => {
+          setNewNoteLabel('')
           handleNoteDetailUpdate("labels", [...labels, newNoteLabel]);
         }}
         buttonStyle={`btn-outline-primary add-label-button ${

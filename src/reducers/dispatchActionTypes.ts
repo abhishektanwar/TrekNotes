@@ -2,6 +2,7 @@ export const dispatchActionTypes = {
   // Notes Actions
   ADD_NEW_NOTE:"ADD_NEW_NOTE",
   ADD_LABELS:"ADD_LABELS",
+  LOAD_NOTES_FROM_SERVER:"LOAD_NOTES_FROM_SERVER",
 
   // Notes Filter Actions
   SET_FILTER_NOTES_PRIORITY:"SET_FILTER_NOTES_PRIORITY",

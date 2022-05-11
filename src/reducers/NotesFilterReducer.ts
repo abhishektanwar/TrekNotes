@@ -1,7 +1,7 @@
-import { initialFilterState } from "./../contexts/FilterContext/index";
+import { FilterStateType, initialFilterState } from "./../contexts/FilterContext/index";
 import { dispatchActionTypes } from "./dispatchActionTypes";
 
-const NotesFilterReducer = (state: any, action: any) => {
+const NotesFilterReducer = (state:FilterStateType, action: any) => {
   const {
     SET_FILTER_NOTES_PRIORITY,
     SET_FILTER_NOTES_DATE,

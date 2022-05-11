@@ -16,7 +16,7 @@ export interface InputFieldProps {
   validation:boolean,
   showTogglePasswordButton?:boolean,
   customClass?:string,
-  autoFocus?:boolean
+  autoFocus?:boolean,
 }
 const InputField: React.FC<InputFieldProps> = ({
   parentClass,
@@ -32,7 +32,8 @@ const InputField: React.FC<InputFieldProps> = ({
   validation,
   showTogglePasswordButton,
   customClass="",
-  autoFocus
+  autoFocus,
+
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (

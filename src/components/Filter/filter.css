@@ -1,0 +1,14 @@
+.filter-main-container{
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
+  border: 1px solid var(--border-color);
+}
+
+.filter{
+  padding: 10px;
+}
+
+.reset-filter-button{
+  margin-left: auto;
+}

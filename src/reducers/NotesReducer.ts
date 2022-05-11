@@ -2,7 +2,7 @@ import { dispatchActionTypes } from './dispatchActionTypes';
 
 
 const NotesReducer = (state:any,action:any) => {
-  const {ADD_LABELS,ADD_NEW_NOTE} = dispatchActionTypes 
+  const {ADD_LABELS,ADD_NEW_NOTE,LOAD_NOTES_FROM_SERVER} = dispatchActionTypes 
   switch (action.type){
     case ADD_NEW_NOTE:
       return {
@@ -14,6 +14,11 @@ const NotesReducer = (state:any,action:any) => {
       return{
         ...state,
         allLabels:[...Array.from(new Set(["All",...state.allLabels,...action.payload]) )]
+      }
+    case LOAD_NOTES_FROM_SERVER:
+      return {
+        ...state,
+        allNotes:[...action.payload]
       }
     case "A":
       return state;

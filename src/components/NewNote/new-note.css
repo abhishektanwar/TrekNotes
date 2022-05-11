@@ -10,10 +10,12 @@
 
 .new-note-input-field{
   border: none;
+  outline: unset;
 }
 
 .new-note-input-field:hover{
   border: none;
+  outline: unset;
 }
 
 .new-note-utility-action-btns{

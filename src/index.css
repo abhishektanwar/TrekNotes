@@ -2,6 +2,10 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+*{
+  outline: unset;
+}
+
 .main-container{
   display: grid;
   grid-template-columns: 10vw 90vw;
