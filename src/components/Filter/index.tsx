@@ -18,10 +18,6 @@ const Filter: FC = () => {
   } = dispatchActionTypes;
   return (
     <>
-      <h3>Priority:{filterState.priority}</h3>
-      <h3>Date:{filterState.date}</h3>
-      <h3>Label:{filterState.label}</h3>
-
       {true ? (
         <div className="">
           <div className="filter-main-container flex-row flex-justify-content-space-between">

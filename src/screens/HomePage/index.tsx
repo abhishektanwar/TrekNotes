@@ -43,9 +43,6 @@ const HomePage: FC = () => {
           );
         })}
       </div>
-      {allLabels.map((label:string)=>{
-        return <h3>{label}</h3>
-      })}
       <h2>Deleted Notes</h2>
       {deletedNotes.map((note: any) => {
           return (

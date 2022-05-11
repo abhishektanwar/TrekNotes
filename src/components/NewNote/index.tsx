@@ -101,7 +101,7 @@ const NewNote: FC = () => {
           setEditNote(false);
           customToast("Note updated", "success");
         }
-      }
+    }
       setIsAddNoteLoading(false);
     }
   };
