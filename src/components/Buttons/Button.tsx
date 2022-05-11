@@ -8,7 +8,7 @@ export interface ButtonTypes{
   type?:"button" | "submit" | "reset"
 }
 const Button:React.FC<ButtonTypes> = (props) => {
-  const { buttonText, buttonStyle, onClick, icon,type } = props;
+  const { buttonText, buttonStyle, onClick, icon,type} = props;
   return (
     <button
       type={type}

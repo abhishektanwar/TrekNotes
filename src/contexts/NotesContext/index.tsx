@@ -6,18 +6,26 @@ import {
   useState,
 } from "react";
 import { reactChildren } from "../../types/general.types";
-import NotesReducer from "./NotesReducer";
+import NotesReducer from "../../reducers/NotesReducer";
 
 const initialNotesState = {
   allNotes: [],
+  allLabels:["All"]
 };
 
-const initialNoteDetails = {
+interface InitialNoteDetailsType{
+  noteTitle: string
+  priority:string
+  noteBgColor:string
+  labels:string[],
+  date:Date
+}
+const initialNoteDetails:InitialNoteDetailsType = {
   noteTitle: "",
   priority:"",
   noteBgColor:"",
   labels:[],
-  date:new Date().toLocaleDateString()
+  date:new Date()
 };
 const NotesContext = createContext<any>(initialNotesState);
 
@@ -26,7 +34,7 @@ const NotesProvider = ({ children }: reactChildren) => {
     NotesReducer,
     initialNotesState
   );
-  const [newNote, setNewNote] = useState(initialNoteDetails);
+  const [newNote, setNewNote] = useState<InitialNoteDetailsType>(initialNoteDetails);
   const [newNoteBodyText, setNewNoteBodyText] = useState("");
   const handleNoteDetailUpdate = (id:string,value:any) => {
     setNewNote((prev) => ({ ...prev, [id]: value }));

@@ -1,17 +1,30 @@
 import { FC, useState } from "react";
+import { useToast } from "../../hooks/useToast";
 import Button from "../Buttons/Button";
 import InputField from "../InputField";
 
-interface AddLabelComponentType{
-  handleNoteDetailUpdate:(id:string,value:any) => void
-  labels:string[]
+interface AddLabelComponentType {
+  handleNoteDetailUpdate: (id: string, value: any) => void;
+  labels: string[];
 }
 
-const AddLabelComponent: FC<AddLabelComponentType> = ({handleNoteDetailUpdate,labels}) => {
+const AddLabelComponent: FC<AddLabelComponentType> = ({
+  handleNoteDetailUpdate,
+  labels,
+}) => {
   const [newNoteLabel, setNewNoteLabel] = useState("");
+  const { customToast } = useToast();
   // const [labels,setLabelsLocal] = useState<string[]>([]);
   return (
-    <div style={{position:'absolute',display:'flex',border:'1px solid black',left:'20px',padding:'10px'}}>
+    <div
+      style={{
+        position: "absolute",
+        display: "flex",
+        border: "1px solid black",
+        left: "20px",
+        padding: "10px",
+      }}
+    >
       <InputField
         type="text"
         id="labels"
@@ -23,11 +36,15 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({handleNoteDetailUpdate,la
         name="new-note-label"
         customClass="add-label-input-field"
       />
-      <Button buttonText="Add" onClick={()=>{
-        handleNoteDetailUpdate("labels",[...labels,newNoteLabel])
-        setNewNoteLabel('')
-      }}
-      buttonStyle="btn-outline-primary add-label-button" />
+      <Button
+        buttonText="Add"
+        onClick={() => {
+          handleNoteDetailUpdate("labels", [...labels, newNoteLabel]);
+        }}
+        buttonStyle={`btn-outline-primary add-label-button ${
+          newNoteLabel === "" ? "btn-disabled" : ""
+        }`}
+      />
     </div>
   );
 };

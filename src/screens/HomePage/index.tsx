@@ -6,7 +6,7 @@ import { useNotes } from "../../contexts/NotesContext";
 
 const HomePage: FC = () => {
   const {
-    notesData: { allNotes },
+    notesData: { allNotes,allLabels },
   } = useNotes();
 
   return (
@@ -35,6 +35,9 @@ const HomePage: FC = () => {
           );
         })}
       </div>
+      {allLabels.map((label:string)=>{
+        return <h3>{label}</h3>
+      })}
     </div>
   );
 };
@@ -45,9 +48,10 @@ export default HomePage;
 // loader on add note : done
 //1 add functionality to add note : done
 //2 list notes : done
-//3 add label, color, priority, date functionality : date functionality left
-//4 refactor add note functionality to check empty field and trims
+//3 add label, color, priority, date functionality : done
+//4 refactor add note functionality to check empty field and trims : done
 //5 create filter compoenent
 //6 add alerts for empty title,empty body,empty label,discard unsaved note error
 // refactor individual note component (render HTML)
 //7 sorting and searching
+//8 add labels added to new note to allLabels context for filter dropdown : done

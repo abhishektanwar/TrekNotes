@@ -1,3 +1,4 @@
+import { dispatchActionTypes } from './../reducers/dispatchActionTypes';
 import { useAuth } from '../contexts/AuthDialogContext';
 import { useNotes } from '../contexts/NotesContext';
 import { useAxios } from './../utils/useAxios';
@@ -8,6 +9,7 @@ function useNotesApiCalls(){
   const {user} = useAuth()
   const {notesDispatch} = useNotes();
   const {customToast} = useToast()
+  const {ADD_NEW_NOTE} = dispatchActionTypes;
   const addNote =async (data:any) => {
     try{
       const result = await operation({
@@ -18,7 +20,7 @@ function useNotesApiCalls(){
       })
       console.log("Result",result);
       if(result.status === 201 && result.statusText==="Created"){
-        notesDispatch({type:"addNewNote",payload:result.data.notes})
+        notesDispatch({type:ADD_NEW_NOTE,payload:result.data.notes})
         customToast("New note added",'success');
         console.log("in if result",result)
         return true

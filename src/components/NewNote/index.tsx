@@ -12,6 +12,8 @@ import useNotesApiCalls from "../../hooks/useNotesApiCalls";
 import { Loader } from "../Loader";
 import AddLabelComponent from "./AddLabelComponent";
 import AddColorComponent from "./AddColorComponent";
+import { useToast } from "../../hooks/useToast";
+import { dispatchActionTypes } from "../../reducers/dispatchActionTypes";
 
 const NewNote: FC = () => {
   const {
@@ -29,6 +31,8 @@ const NewNote: FC = () => {
   const [isAddNoteLoading, setIsAddNoteLoading] = useState(false);
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
   const [showAddLabelComponent, setShowAddLabelComponent] = useState(false);
+  const { customToast } = useToast();
+  const {ADD_LABELS} = dispatchActionTypes;
   const toolbarModules = {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -38,20 +42,38 @@ const NewNote: FC = () => {
     ],
   };
 
+  const handleDiscardNote = () => {
+    if(newNote.noteTitle !== "" || newNoteBodyText !== "" || newNoteBodyText !== "<p></br></p>" ){
+      const userDiscardNoteResponse = window.confirm("Your changes have not been saved. Continuing will discard all your changes. Are you sure you want to continue?");
+      if(userDiscardNoteResponse){
+        setNewNote(initialNoteDetails);
+        setNewNoteBodyText("");
+      }
+
+    }
+  }
+
   const handleAddNote = async () => {
     console.log("note added");
-    setIsAddNoteLoading(true);
-    const resp = await addNote({
-      note: {
-        ...newNote,
-        text: newNoteBodyText,
-      },
-    });
-    if (resp === true) {
-      setNewNote(initialNoteDetails);
-      setNewNoteBodyText("");
+    if (newNote.noteTitle.trim() === "") {
+      customToast("Note title cannot be empty", "warning");
+    } else if (newNoteBodyText === "" || newNoteBodyText === "<p></br></p>") {
+      customToast("Note body cannot be empty", "warning");
+    } else {
+      setIsAddNoteLoading(true);
+      const resp = await addNote({
+        note: {
+          ...newNote,
+          text: newNoteBodyText,
+        },
+      });
+      if (resp === true) {
+        notesDispatch({type:ADD_LABELS,payload:newNote.labels})
+        setNewNote(initialNoteDetails);
+        setNewNoteBodyText("");
+      }
+      setIsAddNoteLoading(false);
     }
-    setIsAddNoteLoading(false);
   };
   return (
     <div className="new-note-main-container">
@@ -96,9 +118,14 @@ const NewNote: FC = () => {
             <span onClick={() => setShowAddColorComponent((prev) => !prev)}>
               <ColorPaletteIcon />
             </span>
-            {showAddLabelComponent && <AddLabelComponent handleNoteDetailUpdate={handleNoteDetailUpdate} labels={newNote.labels} />}
+            {showAddLabelComponent && (
+              <AddLabelComponent
+                handleNoteDetailUpdate={handleNoteDetailUpdate}
+                labels={newNote.labels}
+              />
+            )}
             <span onClick={() => setShowAddLabelComponent((prev) => !prev)}>
-              <NewLabelIcon  />
+              <NewLabelIcon />
             </span>
             <select
               onChange={(e) => {
@@ -113,14 +140,17 @@ const NewNote: FC = () => {
               <option>Medium</option>
               <option>High</option>
             </select>
-            {newNote.date}
-            {newNote.labels.map((label:any)=>label)}
+            {newNote.date.toLocaleDateString()}
+            {newNote.labels.map((label: any) => label)}
           </div>
           <div className="utility-action-btns-right">
             <span onClick={handleAddNote}>
               <AddIcon />
             </span>
+            <span onClick={handleDiscardNote}>
             <CloseIcon />
+
+            </span>
           </div>
         </div>
       </div>

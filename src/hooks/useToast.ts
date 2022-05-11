@@ -1,6 +1,6 @@
 import {toast} from 'react-toastify';
 
-type toastType = "success" | "error";
+type toastType = "success" | "error" | "warning";
 
 function useToast(){
 
@@ -15,6 +15,14 @@ function useToast(){
     }
     else if(type==='error'){
       toast.error(message,{
+        position: "bottom-center",
+        autoClose: 1200,
+        pauseOnHover: false,
+        style:{fontSize:'1.6rem'}
+      })
+    }
+    else if(type==='warning'){
+      toast.warning(message,{
         position: "bottom-center",
         autoClose: 1200,
         pauseOnHover: false,
