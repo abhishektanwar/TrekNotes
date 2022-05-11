@@ -18,16 +18,13 @@ function useNotesApiCalls() {
         headers: { authorization: user.encodedToken },
         data,
       });
-      console.log("Result", result);
       if (result.status === 201 && result.statusText === "Created") {
         notesDispatch({ type: ADD_NEW_NOTE, payload: result.data.notes });
         customToast("New note added", "success");
-        console.log("in if result", result);
         return true;
       }
     } catch (e) {
       customToast("Failed to add new note", "error");
-      console.log("error", e);
     }
   };
 
@@ -41,7 +38,6 @@ function useNotesApiCalls() {
       return result
     } catch (e) {
       customToast("Failed to load data", "error");
-      console.log("error in fetching notes", e);
     }
   };
 
@@ -53,42 +49,30 @@ function useNotesApiCalls() {
         headers: { authorization: user.encodedToken },
         data,
       });
-      console.log("Result", result);
-      if (result.status === 201 && result.statusText === "Created") {
-        notesDispatch({ type: EDIT_NOTE, payload: result.data.notes });
-        customToast("Note updated", "success");
-        console.log("in if result", result);
-        return true;
-      }
+      return result;
     } catch (e) {
       customToast("Failed to update note", "error");
-      console.log("error", e);
     }
   };
 
   const deleteNote = async (noteId:string) => {
-    console.log("in delete note")
     try {
       const result = await operation({
         method: "delete",
         url: `/api/notes/${noteId}`,
         headers: { authorization: user.encodedToken },
       });
-      console.log("Result", result);
       if (result.status === 200 && result.statusText === "OK") {
         notesDispatch({ type: EDIT_NOTE, payload: result.data.notes });
         customToast("Note deleted", "success");
-        console.log("in if result", result);
         return true;
       }
     } catch (e) {
       customToast("Failed to delete note", "error");
-      console.log("error", e);
     }
   }
 
   const archiveNote = async (noteId:string,data:any) => {
-    console.log("in delete note")
     try {
       const result = await operation({
         method: "post",
@@ -96,16 +80,13 @@ function useNotesApiCalls() {
         headers: { authorization: user.encodedToken },
         data
       });
-      console.log("Result", result);
       if (result.status === 201 && result.statusText === "Created") {
         notesDispatch({ type: ARCHIVE_NOTE, payload: result.data });
         customToast("Note archived", "success");
-        console.log("in if result", result);
         return true;
       }
     } catch (e) {
       customToast("Failed to archive note", "error");
-      console.log("error", e);
     }
   }
 

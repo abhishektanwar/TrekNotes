@@ -11,7 +11,7 @@ const AuthContext = createContext({} as any);
 
 const AuthProvider = (props: any) => {
   const { customToast } = useToast();
-  const { operation} = useAxios();
+  const { operation } = useAxios();
   const [authType, setAuthType] = useState(null);
   const [error, setError] = useState({ errorExists: false, errorMessage: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,6 @@ const AuthProvider = (props: any) => {
         url: "/api/auth/login",
         data: user,
       });
-      console.log("response", result);
       if (result.statusText === "OK") {
         utils.setLocalStorage("trek-notes-authToken", result.data.encodedToken);
         setUser({
@@ -37,7 +36,7 @@ const AuthProvider = (props: any) => {
           encodedToken: result.data.encodedToken,
         });
         customToast("Logged in Successfully", "success");
-        navigate('/home');
+        navigate("/home");
         return true;
       }
     } catch (e) {
@@ -85,13 +84,12 @@ const AuthProvider = (props: any) => {
     setUser({ isAuthenticated: false, encodedToken: "" });
   };
 
-  useEffect(()=>{
-    const trekNotesAuthToken = utils.getLocalStorage('trek-notes-authToken');
-    if(trekNotesAuthToken){
-      setUser({isAuthenticated:true,encodedToken:trekNotesAuthToken})
-      console.log("used Effect logged in")
+  useEffect(() => {
+    const trekNotesAuthToken = utils.getLocalStorage("trek-notes-authToken");
+    if (trekNotesAuthToken) {
+      setUser({ isAuthenticated: true, encodedToken: trekNotesAuthToken });
     }
-  },[])
+  }, []);
 
   return (
     <AuthContext.Provider

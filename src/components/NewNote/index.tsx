@@ -17,6 +17,7 @@ import AddColorComponent from "./AddColorComponent";
 import { useToast } from "../../hooks/useToast";
 import { dispatchActionTypes } from "../../reducers/dispatchActionTypes";
 import { useNotesFilter } from "../../contexts/FilterContext";
+import Button from "../Buttons/Button";
 
 const NewNote: FC = () => {
   const {
@@ -28,15 +29,16 @@ const NewNote: FC = () => {
     setNewNoteBodyText,
     newNoteBodyText,
     initialNoteDetails,
+    editNote,
+    setEditNote,
   } = useNotes();
-  const { allNotes } = notesData;
-  const { addNote } = useNotesApiCalls();
+  const { addNote, updateNote } = useNotesApiCalls();
   const [isAddNoteLoading, setIsAddNoteLoading] = useState(false);
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
   const [showAddLabelComponent, setShowAddLabelComponent] = useState(false);
   const { customToast } = useToast();
   const { toggleFilterVisibility } = useNotesFilter();
-  const { ADD_LABELS } = dispatchActionTypes;
+  const { ADD_LABELS, EDIT_NOTE } = dispatchActionTypes;
   const toolbarModules = {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -58,32 +60,57 @@ const NewNote: FC = () => {
       if (userDiscardNoteResponse) {
         setNewNote(initialNoteDetails);
         setNewNoteBodyText("");
+        setEditNote(false);
       }
     }
   };
 
   const handleAddNote = async () => {
-    console.log("note added");
     if (newNote.noteTitle.trim() === "") {
       customToast("Note title cannot be empty", "warning");
     } else if (newNoteBodyText === "" || newNoteBodyText === "<p></br></p>") {
       customToast("Note body cannot be empty", "warning");
     } else {
       setIsAddNoteLoading(true);
-      const resp = await addNote({
-        note: {
-          ...newNote,
-          date: new Date(),
-          text: newNoteBodyText,
-        },
-      });
-      if (resp === true) {
-        notesDispatch({ type: ADD_LABELS, payload: newNote.labels });
-        setNewNote(initialNoteDetails);
-        setNewNoteBodyText("");
+      if (!editNote) {
+        const resp = await addNote({
+          note: {
+            ...newNote,
+            date: new Date(),
+            text: newNoteBodyText,
+          },
+        });
+        if (resp === true) {
+          notesDispatch({ type: ADD_LABELS, payload: newNote.labels });
+          setNewNote(initialNoteDetails);
+          setNewNoteBodyText("");
+        }
+      } else {
+        const resp = await updateNote(newNote._id, {
+          note: {
+            ...newNote,
+            date: new Date(),
+            text: newNoteBodyText,
+          },
+        });
+        if (resp?.status === 201 && resp.statusText === "Created") {
+          notesDispatch({ type: EDIT_NOTE, payload: resp.data.notes });
+          notesDispatch({ type: ADD_LABELS, payload: newNote.labels });
+          setNewNote(initialNoteDetails);
+          setNewNoteBodyText("");
+          setEditNote(false);
+          customToast("Note updated", "success");
+        }
       }
       setIsAddNoteLoading(false);
     }
+  };
+
+  const removeLabel = (index: number) => {
+    const updatedLabels = newNote.labels.filter(
+      (label: string, id: number) => id !== index
+    );
+    setNewNote((prev: any) => ({ ...prev, labels: [...updatedLabels] }));
   };
   return (
     <div className="new-note-main-container">
@@ -124,7 +151,7 @@ const NewNote: FC = () => {
         </div>
         <div className="new-note-utility-action-btns">
           <div
-            className="utility-action-btns-left"
+            className="utility-action-btns-left flex-row flex-align-item-center"
             style={{ position: "relative" }}
           >
             {showAddColorComponent && (
@@ -158,13 +185,36 @@ const NewNote: FC = () => {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            {newNote.date.toLocaleDateString()}
-            {newNote.labels.map((label: any) => label)}
+            <p className="body-typo-sm" style={{ marginLeft: "10px" }}>
+              {new Date(newNote.date).toLocaleDateString()}
+            </p>
+            <ul className="label-main-container">
+              {newNote.labels.map((label: any, index: number) => {
+                return (
+                  <li
+                    className="label-container body-typo-md flex-row flex-align-item-center"
+                    key={index}
+                  >
+                    {label}
+                    <span onClick={() => removeLabel(index)}>
+                      <CloseIcon />
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
           <div className="utility-action-btns-right">
-            <span onClick={handleAddNote}>
-              <AddIcon />
-            </span>
+            {!editNote ? (
+              <span onClick={handleAddNote}>
+                <AddIcon />
+              </span>
+            ) : (
+              <Button
+                buttonText="Update"
+                onClick={() => handleAddNote()}
+              ></Button>
+            )}
             <span onClick={handleDiscardNote}>
               <CloseIcon />
             </span>

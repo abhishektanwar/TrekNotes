@@ -21,6 +21,7 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({
         border: "1px solid black",
         left: "20px",
         padding: "10px",
+        top:"36px"
       }}
     >
       <InputField

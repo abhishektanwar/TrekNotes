@@ -1,3 +1,7 @@
+*{
+  color: rgb(22, 22, 22);
+}
+
 .new-note-main-container{
   width: 80%;
   margin: auto;
@@ -53,4 +57,16 @@
 
 .add-label-input-field:hover{
   border-color: black ;
+}
+
+.label-main-container{
+  list-style-type: none;
+  display: flex;
+}
+
+.label-container{
+  border: 2px solid var(--light-border-color);
+  border-radius: 5px;
+  padding-left: 4px;
+  margin-right: 4px;
 }

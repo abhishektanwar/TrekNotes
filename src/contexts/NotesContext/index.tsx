@@ -47,35 +47,27 @@ const NotesProvider = ({ children }: reactChildren) => {
   const [newNote, setNewNote] =
     useState<InitialNoteDetailsType>(initialNoteDetails);
   const [newNoteBodyText, setNewNoteBodyText] = useState("");
-  const { EDIT_NOTE } = dispatchActionTypes;
+  const [editNote,setEditNote] = useState<boolean>(false);
+  const [isFetchingNotes, setIsFetchingNotes] = useState(false);
+  const { user } = useAuth();
+  const { fetchNotes } = useNotesApiCalls();
+  const { LOAD_NOTES_FROM_SERVER } = dispatchActionTypes;
+
   const handleNoteDetailUpdate = (id: string, value: any) => {
     setNewNote((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleNoteEdit = (nodeId: string) => {
-    console.log("()=>handleNoteEdit(note.id)");
-    const updateNotes = notesData.allNotes.filter((note: any) =>
-      note._id === nodeId ? { ...note, noteTitle: "changed title",text:"hello" } : note
-    );
-    // const updateNotes = notesData.allNotes.filter((note:any)=> note._id !== nodeId )
-    notesDispatch({ type: EDIT_NOTE, payload: updateNotes });
-    console.log("updateNotes", updateNotes);
-  };
-
-  const { user } = useAuth();
-  const [isFetchingNotes, setIsFetchingNotes] = useState(false);
-  const { fetchNotes } = useNotesApiCalls();
-  const { LOAD_NOTES_FROM_SERVER } = dispatchActionTypes;
-  useEffect(() => {
-    console.log("new note", newNote);
-  }, [newNote]);
+  const handleEditNote = (noteId:string) => {
+    const noteToEdit = notesData.allNotes.find((note:any)=>note._id === noteId);
+    setNewNote(noteToEdit);
+    setNewNoteBodyText(noteToEdit.text)
+  }
 
   useEffect(() => {
     setIsFetchingNotes(true);
     if (user.isAuthenticated) {
       (async () => {
         try {
-          console.log("fetch notes running");
           const response = await fetchNotes();
           if (response?.status === 200 && response.statusText === "OK") {
             notesDispatch({
@@ -84,7 +76,6 @@ const NotesProvider = ({ children }: reactChildren) => {
             });
           }
         } catch (e) {
-          console.log("efferc fetcg notes", e);
         }
         setIsFetchingNotes(false);
       })();
@@ -102,7 +93,9 @@ const NotesProvider = ({ children }: reactChildren) => {
         setNewNoteBodyText,
         initialNoteDetails,
         isFetchingNotes,
-        handleNoteEdit,
+        handleEditNote,
+        editNote,
+        setEditNote,
       }}
     >
       {children}

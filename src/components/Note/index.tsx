@@ -22,36 +22,40 @@ interface NoteType {
   date: string;
 }
 
-type DeleteArchiveNoteType = 'delete' | 'archive';
-
 const Note: FC<NoteType> = (note) => {
   const { noteTitle, text, id, priority, labels, bgColor, date } = note;
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
-  const {handleNoteDetailUpdate,handleNoteEdit,notesDispatch} = useNotes()
-  const {updateNote,deleteNote,archiveNote} = useNotesApiCalls();
-  const {DELETE_NOTE,ARCHIVE_NOTE} = dispatchActionTypes;
-  const handleUpdateNoteColor = async (bgColor:string) => {
-    console.log("note added");
-      const resp = await updateNote(note.id,{
-        note: {
-          ...note,
-          noteBgColor:bgColor,
-        },
-      });
+  const {
+    handleNoteDetailUpdate,
+    handleNoteEdit,
+    notesDispatch,
+    handleEditNote,
+    editNote,
+    setEditNote,
+  } = useNotes();
+  const { updateNote, deleteNote, archiveNote } = useNotesApiCalls();
+  const { DELETE_NOTE, ARCHIVE_NOTE } = dispatchActionTypes;
+  const handleUpdateNoteColor = async (bgColor: string) => {
+    const resp = await updateNote(note.id, {
+      note: {
+        ...note,
+        noteBgColor: bgColor,
+      },
+    });
   };
 
   const removeNote = async () => {
-    const resp = await deleteNote(note.id)
-    if(resp === true){
-      notesDispatch({type:DELETE_NOTE,payload:note})
+    const resp = await deleteNote(note.id);
+    if (resp === true) {
+      notesDispatch({ type: DELETE_NOTE, payload: note });
     }
-  }
+  };
 
   const ArchiveNote = async () => {
-    const resp = await archiveNote(note.id,{
-      note:{...note}
-    })
-  }
+    const resp = await archiveNote(note.id, {
+      note: { ...note },
+    });
+  };
 
   return (
     <div
@@ -67,47 +71,58 @@ const Note: FC<NoteType> = (note) => {
 
       <div className="utility-container flex-column">
         <div className="utility-btn-container flex-row ">
-        {showAddColorComponent && (
-              <AddColorComponent
-                handleFn={(bgColor:string)=>handleUpdateNoteColor(bgColor)}
-                setShowAddColorComponent={setShowAddColorComponent}
-              />
-            )}
-          <span className="note-utility-btn" onClick={() => setShowAddColorComponent((prev) => !prev)}>
-          {/* <span className="note-utility-btn" onClick={()=>{
-            console.log("note id",note.id)
-            handleUpdateNote()
-
-          }}> */}
+          {showAddColorComponent && (
+            <AddColorComponent
+              handleFn={(bgColor: string) => handleUpdateNoteColor(bgColor)}
+              setShowAddColorComponent={setShowAddColorComponent}
+            />
+          )}
+          <span
+            className="note-utility-btn"
+            onClick={() => setShowAddColorComponent((prev) => !prev)}
+          >
             <ColorPaletteIcon />
           </span>
-          <span className="note-utility-btn" onClick={()=>ArchiveNote()}>
+          <span className="note-utility-btn" onClick={() => ArchiveNote()}>
             <ArchiveIcon />
           </span>
-          <span className="note-utility-btn" onClick={()=>removeNote()}>
+          <span className="note-utility-btn" onClick={() => removeNote()}>
             <DeleteIcon />
           </span>
-          <span className="note-utility-btn">
+          <span
+            className="note-utility-btn"
+            onClick={() => {
+              handleEditNote(note.id);
+              window.scroll(0, 0);
+              setEditNote(true);
+            }}
+          >
             <EditNoteIcon />
           </span>
         </div>
-        <div className="meta-data flex-row">
+        <div className="meta-data flex-row flex-align-item-center">
           <div
-            className="flex-row flex-align-items-center"
+            className="flex-row flex-align-item-center"
             style={{ paddingRight: "10px" }}
           >
             <PriorityIcon />
-            <p className="body-typo-md text-medium-weight">:{"priority"}</p>
+            <p className="body-typo-sm text-medium-weight">:{priority}</p>
           </div>
-          {labels.map((label) => (
-            <h6>{label}</h6>
-          ))}
-          <div className="flex-row flex-align-items-center">
+          <div className="flex-row flex-align-item-center">
             <CalendarIcon />
-            <p className="body-typo-md text-medium-weight">
+            <p className="body-typo-sm text-medium-weight">
               :{new Date(date).toLocaleDateString()}
             </p>
           </div>
+          <span style={{ marginLeft: "6px", marginRight: "6px" }}>|</span>
+          {labels[0] !== undefined ? (
+            <p className="body-typo-sm" style={{ marginRight: "6px" }}>
+              {labels[0]}
+            </p>
+          ) : null}
+          {labels[1] !== undefined ? (
+            <p className="body-typo-sm">{labels[1]}</p>
+          ) : null}
         </div>
       </div>
     </div>

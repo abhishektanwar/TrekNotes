@@ -3,10 +3,10 @@ import { useAuth } from "../../contexts/AuthDialogContext";
 import { useModal } from "../../contexts/ModalContext";
 import Button from "../Buttons/Button";
 import InputField from "../InputField";
-import {Loader} from '../../components/Loader';
+import { Loader } from "../../components/Loader";
 import "./authentication.css";
 const Login = () => {
-  const { loginHandler,isLoading,error,setAuthType } = useAuth();
+  const { loginHandler, isLoading, error, setAuthType } = useAuth();
 
   const [loginCredentials, setLoginCredentials] = useState({
     email: "",
@@ -25,7 +25,7 @@ const Login = () => {
       ? true
       : false;
 
-  const handleLoginCredentialInput = (e:any) => {
+  const handleLoginCredentialInput = (e: any) => {
     setLoginCredentials((creds) => ({
       ...creds,
       [e.target.name]: e.target.value,
@@ -35,7 +35,6 @@ const Login = () => {
   const loginUser = async () => {
     const success = await loginHandler(loginCredentials);
     if (success) hideModal();
-    console.log("modal hidden");
   };
 
   return (
@@ -66,7 +65,7 @@ const Login = () => {
           validation={
             loginCredentials.password.length === 0 ? true : isValidPassword
           }
-          showTogglePasswordButton = {true}
+          showTogglePasswordButton={true}
         />
         <div className="card-action-btn-container flex-column">
           {error.errorExists && (
@@ -86,7 +85,12 @@ const Login = () => {
             buttonText="Login with test credenials"
             buttonStyle="secondary-button body-typo-md margin-top-0"
             icon="fas fa-chevron-right"
-            onClick={() => setLoginCredentials({email:"adarshbalika@gmail.com",password:"adarshBalika123"})}
+            onClick={() =>
+              setLoginCredentials({
+                email: "adarshbalika@gmail.com",
+                password: "adarshBalika123",
+              })
+            }
           />
         </div>
       </div>
