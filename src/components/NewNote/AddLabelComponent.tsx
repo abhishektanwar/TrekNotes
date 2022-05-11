@@ -12,7 +12,6 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({
   labels,
 }) => {
   const [newNoteLabel, setNewNoteLabel] = useState("");
-  // const [labels,setLabelsLocal] = useState<string[]>([]);
   return (
     <div
       style={{

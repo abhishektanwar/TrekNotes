@@ -1,12 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-// import { ReactComponent as Explore } from "../../assets/explore.svg";
-// import { ReactComponent as History } from "../../assets/history.svg";
-// import { ReactComponent as WatchLater } from "../../assets/watch-later.svg";
-// import { ReactComponent as PlaylistAddCheck } from "../../assets/playlist-add-check.svg";
-// import { ReactComponent as Like } from "../../assets/like.svg";
-// import { ReactComponent as Close } from "../../assets/close.svg";
 import "./aside-nav.css";
 import { useNavigate } from "react-router-dom";
 import Button from "../Buttons/Button";

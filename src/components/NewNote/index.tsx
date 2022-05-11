@@ -115,7 +115,12 @@ const NewNote: FC = () => {
   return (
     <div className="new-note-main-container">
       {isAddNoteLoading && <Loader />}
-      <div className="new-note-container shadow-box">
+      <div
+        className="new-note-container shadow-box"
+        style={{
+          backgroundColor: newNote.noteBgColor,
+        }}
+      >
         <div style={{ display: "flex" }}>
           <InputField
             type="text"
@@ -144,9 +149,6 @@ const NewNote: FC = () => {
             value={newNoteBodyText}
             placeholder="Take a note..."
             onChange={setNewNoteBodyText}
-            // style={{
-            //   backgroundColor: "blue",
-            // }}
           />
         </div>
         <div className="new-note-utility-action-btns">
