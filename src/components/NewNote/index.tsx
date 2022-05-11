@@ -35,8 +35,8 @@ const NewNote: FC = () => {
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
   const [showAddLabelComponent, setShowAddLabelComponent] = useState(false);
   const { customToast } = useToast();
-  const {toggleFilterVisibility} = useNotesFilter();
-  const {ADD_LABELS} = dispatchActionTypes;
+  const { toggleFilterVisibility } = useNotesFilter();
+  const { ADD_LABELS } = dispatchActionTypes;
   const toolbarModules = {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -47,15 +47,20 @@ const NewNote: FC = () => {
   };
 
   const handleDiscardNote = () => {
-    if(newNote.noteTitle !== "" || newNoteBodyText !== "" || newNoteBodyText !== "<p></br></p>" ){
-      const userDiscardNoteResponse = window.confirm("Your changes have not been saved. Continuing will discard all your changes. Are you sure you want to continue?");
-      if(userDiscardNoteResponse){
+    if (
+      newNote.noteTitle !== "" ||
+      newNoteBodyText !== "" ||
+      newNoteBodyText !== "<p></br></p>"
+    ) {
+      const userDiscardNoteResponse = window.confirm(
+        "Your changes have not been saved. Continuing will discard all your changes. Are you sure you want to continue?"
+      );
+      if (userDiscardNoteResponse) {
         setNewNote(initialNoteDetails);
         setNewNoteBodyText("");
       }
-
     }
-  }
+  };
 
   const handleAddNote = async () => {
     console.log("note added");
@@ -68,12 +73,12 @@ const NewNote: FC = () => {
       const resp = await addNote({
         note: {
           ...newNote,
-          date:new Date(),
+          date: new Date(),
           text: newNoteBodyText,
         },
       });
       if (resp === true) {
-        notesDispatch({type:ADD_LABELS,payload:newNote.labels})
+        notesDispatch({ type: ADD_LABELS, payload: newNote.labels });
         setNewNote(initialNoteDetails);
         setNewNoteBodyText("");
       }
@@ -84,26 +89,28 @@ const NewNote: FC = () => {
     <div className="new-note-main-container">
       {isAddNoteLoading && <Loader />}
       <div className="new-note-container shadow-box">
-        <div style={{display:'flex'}}>
-
-        <InputField
-          type="text"
-          name="noteTitle"
-          id="noteTitle"
-          placeholder="Title"
-          required
-          onChange={(e) => {
-            handleNoteDetailUpdate(e.target.id, e.target.value);
-          }}
-          value={newNote.noteTitle}
-          validation={true}
-          customClass="new-note-input-field"
-          autoFocus={true}
+        <div style={{ display: "flex" }}>
+          <InputField
+            type="text"
+            name="noteTitle"
+            id="noteTitle"
+            placeholder="Title"
+            required
+            onChange={(e) => {
+              handleNoteDetailUpdate(e.target.id, e.target.value);
+            }}
+            value={newNote.noteTitle}
+            validation={true}
+            customClass="new-note-input-field"
+            autoFocus={true}
           />
-          <span style={{marginTop:'7px',cursor:'pointer'}} onClick={()=>toggleFilterVisibility()}>
+          <span
+            style={{ marginTop: "7px", cursor: "pointer" }}
+            onClick={() => toggleFilterVisibility()}
+          >
             <FilterIcon />
           </span>
-          </div>
+        </div>
         <div className="text-editor">
           <ReactQuill
             modules={toolbarModules}
@@ -159,8 +166,7 @@ const NewNote: FC = () => {
               <AddIcon />
             </span>
             <span onClick={handleDiscardNote}>
-            <CloseIcon />
-
+              <CloseIcon />
             </span>
           </div>
         </div>

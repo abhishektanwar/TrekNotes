@@ -45,9 +45,21 @@ const NotesProvider = ({ children }: reactChildren) => {
   const [newNote, setNewNote] =
     useState<InitialNoteDetailsType>(initialNoteDetails);
   const [newNoteBodyText, setNewNoteBodyText] = useState("");
+  const { EDIT_NOTE } = dispatchActionTypes;
   const handleNoteDetailUpdate = (id: string, value: any) => {
     setNewNote((prev) => ({ ...prev, [id]: value }));
   };
+
+  const handleNoteEdit = (nodeId: string) => {
+    console.log("()=>handleNoteEdit(note.id)");
+    const updateNotes = notesData.allNotes.filter((note: any) =>
+      note._id === nodeId ? { ...note, noteTitle: "changed title",text:"hello" } : note
+    );
+    // const updateNotes = notesData.allNotes.filter((note:any)=> note._id !== nodeId )
+    notesDispatch({ type: EDIT_NOTE, payload: updateNotes });
+    console.log("updateNotes", updateNotes);
+  };
+
   const { user } = useAuth();
   const [isFetchingNotes, setIsFetchingNotes] = useState(false);
   const { fetchNotes } = useNotesApiCalls();
@@ -88,6 +100,7 @@ const NotesProvider = ({ children }: reactChildren) => {
         setNewNoteBodyText,
         initialNoteDetails,
         isFetchingNotes,
+        handleNoteEdit,
       }}
     >
       {children}

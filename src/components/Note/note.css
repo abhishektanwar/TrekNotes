@@ -1,7 +1,35 @@
 .note-container{
-  width: 400px;
-  height: 400px;
+  width: 280px;
+  min-height: 300px;
   border-radius: 20px;
-  display: inline-block;
   margin: 20px;
+  padding-top:10px ;
+  padding-left:10px ;
+  padding-right:10px ;
+
+}
+
+.note-body-text{
+  font-size: 2rem;
+}
+
+.utility-container{
+  border-top: 2px solid var(--light-border-color);
+  margin-top: auto;
+}
+
+.utility-btn-container{
+  padding: 10px;
+  justify-content: space-around;
+  position: relative;
+}
+
+.note-utility-btn{
+  cursor: pointer;
+}
+
+.meta-data{
+  border-top: 2px solid var(--light-border-color);
+  padding: 10px;
+  justify-content: flex-end;
 }

@@ -1,12 +1,14 @@
 import { FC } from "react";
 
 interface AddColorComponentType {
-  handleNoteDetailUpdate: (id: string, value: any) => void;
+  handleNoteDetailUpdate?: (id: string, value: any) => void;
+  handleFn?:(x:string)=>void,
   setShowAddColorComponent: (prev: boolean) => void;
 }
 
 const AddColorComponent: FC<AddColorComponentType> = ({
   handleNoteDetailUpdate,
+  handleFn,
   setShowAddColorComponent,
 }) => {
   return (
@@ -34,8 +36,9 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "green");
+          handleNoteDetailUpdate?.("noteBgColor", "green");
           setShowAddColorComponent(false);
+          handleFn?.("green")
         }}
       ></div>
       <div
@@ -49,8 +52,9 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "pink");
+          handleNoteDetailUpdate?.("noteBgColor", "pink");
           setShowAddColorComponent(false);
+          handleFn?.("pink")
         }}
       />
       <div
@@ -64,8 +68,10 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "blue");
+          handleNoteDetailUpdate?.("noteBgColor", "blue");
           setShowAddColorComponent(false);
+          handleFn?.("blue")
+
         }}
       />
       <div
@@ -79,8 +85,9 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate("noteBgColor", "yellow");
+          handleNoteDetailUpdate?.("noteBgColor", "yellow");
           setShowAddColorComponent(false);
+          handleFn?.("yellow")
         }}
       />
     </div>
