@@ -10,6 +10,7 @@ import "./note.css";
 import AddColorComponent from "../NewNote/AddColorComponent";
 import { useNotes } from "../../contexts/NotesContext";
 import useNotesApiCalls from "../../hooks/useNotesApiCalls";
+import { dispatchActionTypes } from "../../reducers/dispatchActionTypes";
 
 interface NoteType {
   noteTitle: string;
@@ -21,12 +22,14 @@ interface NoteType {
   date: string;
 }
 
+type DeleteArchiveNoteType = 'delete' | 'archive';
+
 const Note: FC<NoteType> = (note) => {
   const { noteTitle, text, id, priority, labels, bgColor, date } = note;
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
-  const {handleNoteDetailUpdate,handleNoteEdit} = useNotes()
-  const {updateNote} = useNotesApiCalls();
-
+  const {handleNoteDetailUpdate,handleNoteEdit,notesDispatch} = useNotes()
+  const {updateNote,deleteNote,archiveNote} = useNotesApiCalls();
+  const {DELETE_NOTE,ARCHIVE_NOTE} = dispatchActionTypes;
   const handleUpdateNoteColor = async (bgColor:string) => {
     console.log("note added");
       const resp = await updateNote(note.id,{
@@ -36,6 +39,19 @@ const Note: FC<NoteType> = (note) => {
         },
       });
   };
+
+  const removeNote = async () => {
+    const resp = await deleteNote(note.id)
+    if(resp === true){
+      notesDispatch({type:DELETE_NOTE,payload:note})
+    }
+  }
+
+  const ArchiveNote = async () => {
+    const resp = await archiveNote(note.id,{
+      note:{...note}
+    })
+  }
 
   return (
     <div
@@ -65,10 +81,10 @@ const Note: FC<NoteType> = (note) => {
           }}> */}
             <ColorPaletteIcon />
           </span>
-          <span className="note-utility-btn">
+          <span className="note-utility-btn" onClick={()=>ArchiveNote()}>
             <ArchiveIcon />
           </span>
-          <span className="note-utility-btn">
+          <span className="note-utility-btn" onClick={()=>removeNote()}>
             <DeleteIcon />
           </span>
           <span className="note-utility-btn">

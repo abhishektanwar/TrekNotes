@@ -10,7 +10,7 @@ import sortByDate from "../../utils/FilterNotes/sortByDate";
 
 const HomePage: FC = () => {
   const {
-    notesData: { allNotes,allLabels },isFetchingNotes
+    notesData: { allNotes,allLabels,deletedNotes },isFetchingNotes
   } = useNotes();
   const {filterState} = useNotesFilter()
   const finalFilteredNotes:NoteType[] = getFilteredNotes(allNotes,filterState)
@@ -46,6 +46,20 @@ const HomePage: FC = () => {
       {allLabels.map((label:string)=>{
         return <h3>{label}</h3>
       })}
+      <h2>Deleted Notes</h2>
+      {deletedNotes.map((note: any) => {
+          return (
+            <Note
+              noteTitle={note.noteTitle}
+              text={note.text}
+              id={note._id}
+              priority={note.priority}
+              bgColor={note.noteBgColor}
+              labels={note.labels}
+              date={note.date}
+            />
+          );
+        })}
     </div>
   );
 };

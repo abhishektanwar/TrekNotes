@@ -26,6 +26,8 @@ export interface NoteType extends InitialNoteDetailsType {
 const initialNotesState = {
   allNotes: [],
   allLabels: ["All"],
+  deletedNotes:[],
+  archivedNotes:[],
 };
 
 const initialNoteDetails: InitialNoteDetailsType = {
