@@ -22,7 +22,7 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         onClick={(e) => {
           handleNoteDetailUpdate?.("noteBgColor", "#38975d");
           setShowAddColorComponent(false);
-          handleFn?.("green");
+          handleFn?.("#38975d");
         }}
       ></div>
       <div
@@ -34,7 +34,7 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         onClick={(e) => {
           handleNoteDetailUpdate?.("noteBgColor", "#d366c4");
           setShowAddColorComponent(false);
-          handleFn?.("pink");
+          handleFn?.("#d366c4");
         }}
       />
       <div
@@ -46,7 +46,7 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         onClick={(e) => {
           handleNoteDetailUpdate?.("noteBgColor", "#66d3cd");
           setShowAddColorComponent(false);
-          handleFn?.("blue");
+          handleFn?.("#66d3cd");
         }}
       />
       <div
@@ -58,7 +58,7 @@ const AddColorComponent: FC<AddColorComponentType> = ({
         onClick={(e) => {
           handleNoteDetailUpdate?.("noteBgColor", "#dad760");
           setShowAddColorComponent(false);
-          handleFn?.("yellow");
+          handleFn?.("#dad760");
         }}
       />
     </div>

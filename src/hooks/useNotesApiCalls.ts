@@ -9,7 +9,7 @@ function useNotesApiCalls() {
   const { user } = useAuth();
   const { notesDispatch } = useNotes();
   const { customToast } = useToast();
-  const { ADD_NEW_NOTE, LOAD_NOTES_FROM_SERVER, EDIT_NOTE, ARCHIVE_NOTE } = dispatchActionTypes;
+  const { ADD_NEW_NOTE, EDIT_NOTE, ARCHIVE_NOTE } = dispatchActionTypes;
   const addNote = async (data: any) => {
     try {
       const result = await operation({
@@ -49,6 +49,7 @@ function useNotesApiCalls() {
         headers: { authorization: user.encodedToken },
         data,
       });
+
       return result;
     } catch (e) {
       customToast("Failed to update note", "error");

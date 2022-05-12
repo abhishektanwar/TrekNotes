@@ -39,8 +39,8 @@ const Note: FC<NoteType> = (note) => {
   } = note;
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
   const { notesDispatch, handleEditNote, setEditNote } = useNotes();
-  const { updateNote, deleteNote, archiveNote,addNote } = useNotesApiCalls();
-  const { DELETE_NOTE,RESTORE_NOTE_FROM_BIN } = dispatchActionTypes;
+  const { updateNote, deleteNote, archiveNote, addNote } = useNotesApiCalls();
+  const { DELETE_NOTE, RESTORE_NOTE_FROM_BIN, EDIT_NOTE } = dispatchActionTypes;
 
   const handleUpdateNoteColor = async (bgColor: string) => {
     const resp = await updateNote(note.id, {
@@ -49,6 +49,9 @@ const Note: FC<NoteType> = (note) => {
         noteBgColor: bgColor,
       },
     });
+    if (resp?.status === 201 && resp.statusText === "Created") {
+      notesDispatch({ type: EDIT_NOTE, payload: resp.data.notes });
+    }
   };
 
   const removeNote = async () => {
@@ -60,12 +63,12 @@ const Note: FC<NoteType> = (note) => {
 
   const restoreNoteFromBin = async () => {
     const resp = await addNote({
-      note:{...note}
-    })
-    if(resp === true){
-      notesDispatch({type:RESTORE_NOTE_FROM_BIN,payload:note})
+      note: { ...note },
+    });
+    if (resp === true) {
+      notesDispatch({ type: RESTORE_NOTE_FROM_BIN, payload: note });
     }
-  }
+  };
 
   const ArchiveNote = async () => {
     const resp = await archiveNote(note.id, {
@@ -107,7 +110,12 @@ const Note: FC<NoteType> = (note) => {
             </span>
           )}
           {!isArchivedNote && (
-            <span className="note-utility-btn" onClick={() => isDeletedNote ? restoreNoteFromBin(): removeNote()}>
+            <span
+              className="note-utility-btn"
+              onClick={() =>
+                isDeletedNote ? restoreNoteFromBin() : removeNote()
+              }
+            >
               {isDeletedNote ? <RestoreIcon /> : <DeleteIcon />}
             </span>
           )}

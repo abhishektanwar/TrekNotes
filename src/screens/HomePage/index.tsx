@@ -28,6 +28,7 @@ const HomePage: FC = () => {
       <div className="notes-listing-container">
         {finalFilteredNotes.map((note: any) => {
           return (
+            <div key={note._id}>
             <Note
               noteTitle={note.noteTitle}
               text={note.text}
@@ -36,7 +37,7 @@ const HomePage: FC = () => {
               bgColor={note.noteBgColor}
               labels={note.labels}
               date={note.date}
-            />
+            /></div>
           );
         })}
       </div>
