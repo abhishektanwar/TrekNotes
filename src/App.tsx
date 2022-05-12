@@ -12,6 +12,8 @@ import AsideNav from "./components/AsideNav";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
+import DeletedNotes from "./screens/DeletedNotes";
+import ArchivedNotes from "./screens/ArchivedNotes";
 
 const App: FC = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +31,8 @@ const App: FC = () => {
             <Route path="/" element={<LandingPage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<HomePage /> } />
-
+              <Route path="/deleted-notes" element={<DeletedNotes /> } />
+              <Route path="/archived-notes" element={<ArchivedNotes /> } />
             </Route>
           </Routes>
         </div>

@@ -22,3 +22,8 @@ body{
 .primary-color{
   color: var(--primary-color);
 }
+
+.page-heading{
+  margin:1rem;
+  border-bottom: 1px solid var(--border-color);
+}
