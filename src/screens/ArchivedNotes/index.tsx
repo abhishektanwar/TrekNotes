@@ -8,26 +8,25 @@ const ArchivedNotes:FC = () => {
     <div>
       <div className="page-heading">
 
-        <h2>Deleted notes</h2>
+        <h2>Archived notes</h2>
       </div>
       {archivedNotes.length === 0 ? (
         <div className="flex-row flex-justify-content-center margin-top-20">
-          <h3 style={{ textAlign: "center" }}>Your bin is empty.</h3>
+          <h3 style={{ textAlign: "center" }}>No archived notes found.</h3>
         </div>
       ) : (
-        <div>
-          {archivedNotes.map((deletedNote: any) => {
-            console.log("deletedNote", deletedNote);
+        <div className="notes-listing-container" style={{width:'100%'}}>
+          {archivedNotes.map((archivedNote: any) => {
             return (
               <Note
-                noteTitle={deletedNote.noteTitle}
-                text={deletedNote.text}
-                id={deletedNote.id}
-                priority={deletedNote.priority}
-                bgColor={deletedNote.noteBgColor}
-                labels={deletedNote.labels}
-                date={deletedNote.date}
-                isDeletedNote={true}
+                noteTitle={archivedNote.noteTitle}
+                text={archivedNote.text}
+                id={archivedNote._id}
+                priority={archivedNote.priority}
+                bgColor={archivedNote.noteBgColor}
+                labels={archivedNote.labels}
+                date={archivedNote.date}
+                isArchivedNote={true}
               />
             );
           })}

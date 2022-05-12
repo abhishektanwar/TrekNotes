@@ -9,7 +9,7 @@ function useNotesApiCalls() {
   const { user } = useAuth();
   const { notesDispatch } = useNotes();
   const { customToast } = useToast();
-  const { ADD_NEW_NOTE, EDIT_NOTE, ARCHIVE_NOTE } = dispatchActionTypes;
+  const { ADD_NEW_NOTE, EDIT_NOTE, ARCHIVE_NOTE,UNARCHIVE_NOTE } = dispatchActionTypes;
   const addNote = async (data: any) => {
     try {
       const result = await operation({
@@ -35,13 +35,13 @@ function useNotesApiCalls() {
         url: "/api/notes",
         headers: { authorization: user.encodedToken },
       });
-      return result
+      return result;
     } catch (e) {
       customToast("Failed to load data", "error");
     }
   };
 
-  const updateNote = async (noteId:string,data: any) => {
+  const updateNote = async (noteId: string, data: any) => {
     try {
       const result = await operation({
         method: "post",
@@ -56,7 +56,7 @@ function useNotesApiCalls() {
     }
   };
 
-  const deleteNote = async (noteId:string) => {
+  const deleteNote = async (noteId: string) => {
     try {
       const result = await operation({
         method: "delete",
@@ -71,15 +71,15 @@ function useNotesApiCalls() {
     } catch (e) {
       customToast("Failed to delete note", "error");
     }
-  }
+  };
 
-  const archiveNote = async (noteId:string,data:any) => {
+  const archiveNote = async (noteId: string, data: any) => {
     try {
       const result = await operation({
         method: "post",
         url: `/api/notes/archives/${noteId}`,
         headers: { authorization: user.encodedToken },
-        data
+        data,
       });
       if (result.status === 201 && result.statusText === "Created") {
         notesDispatch({ type: ARCHIVE_NOTE, payload: result.data });
@@ -89,9 +89,34 @@ function useNotesApiCalls() {
     } catch (e) {
       customToast("Failed to archive note", "error");
     }
-  }
+  };
 
-  return { addNote, fetchNotes, updateNote, deleteNote, archiveNote };
+  const restoreArchivedNote = async (noteId: string) => {
+    try {
+      const result = await operation({
+        method: "post",
+        url: `/api/archives/restore/${noteId}`,
+        headers: { authorization: user.encodedToken },
+      });
+      if(result.status===200 && result.statusText==="OK"){
+        notesDispatch({ type: UNARCHIVE_NOTE, payload: result.data });
+        customToast("Note unarchived","success")
+        return true
+      }
+    } catch (e) {
+      customToast("Failed to unarchive note","error");
+      console.log(e);
+    }
+  };
+
+  return {
+    addNote,
+    fetchNotes,
+    updateNote,
+    deleteNote,
+    archiveNote,
+    restoreArchivedNote,
+  };
 }
 
 export default useNotesApiCalls;

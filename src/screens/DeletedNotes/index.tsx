@@ -17,9 +17,8 @@ const DeletedNotes: FC = () => {
           <h3 style={{ textAlign: "center" }}>Your bin is empty.</h3>
         </div>
       ) : (
-        <div>
+        <div className="notes-listing-container" style={{width:'100%'}}>
           {deletedNotes.map((deletedNote: any) => {
-            console.log("deletedNote", deletedNote);
             return (
               <Note
                 noteTitle={deletedNote.noteTitle}

@@ -10,7 +10,7 @@ import "./home-page.css";
 
 const HomePage: FC = () => {
   const {
-    notesData: { allNotes },
+    notesData: { allNotes, archivedNotes },
     isFetchingNotes,
   } = useNotes();
   const { filterState } = useNotesFilter();
@@ -29,15 +29,16 @@ const HomePage: FC = () => {
         {finalFilteredNotes.map((note: any) => {
           return (
             <div key={note._id}>
-            <Note
-              noteTitle={note.noteTitle}
-              text={note.text}
-              id={note._id}
-              priority={note.priority}
-              bgColor={note.noteBgColor}
-              labels={note.labels}
-              date={note.date}
-            /></div>
+              <Note
+                noteTitle={note.noteTitle}
+                text={note.text}
+                id={note._id}
+                priority={note.priority}
+                bgColor={note.noteBgColor}
+                labels={note.labels}
+                date={note.date}
+              />
+            </div>
           );
         })}
       </div>

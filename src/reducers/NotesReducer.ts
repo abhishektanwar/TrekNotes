@@ -2,7 +2,7 @@ import { dispatchActionTypes } from './dispatchActionTypes';
 
 
 const NotesReducer = (state:any,action:any) => {
-  const {ADD_LABELS,ADD_NEW_NOTE,LOAD_NOTES_FROM_SERVER,EDIT_NOTE,DELETE_NOTE,ARCHIVE_NOTE,RESTORE_NOTE_FROM_BIN} = dispatchActionTypes 
+  const {ADD_LABELS,ADD_NEW_NOTE,LOAD_NOTES_FROM_SERVER,EDIT_NOTE,DELETE_NOTE,ARCHIVE_NOTE,RESTORE_NOTE_FROM_BIN,UNARCHIVE_NOTE} = dispatchActionTypes 
   switch (action.type){
     case ADD_NEW_NOTE:
       return {
@@ -33,7 +33,7 @@ const NotesReducer = (state:any,action:any) => {
     case ARCHIVE_NOTE:
       return{
         ...state,
-        archivedNotes:[action.payload.archives,...state.archivedNotes],
+        archivedNotes:[...action.payload.archives],
         allNotes:[...action.payload.notes]
       }
     case RESTORE_NOTE_FROM_BIN :
@@ -43,6 +43,13 @@ const NotesReducer = (state:any,action:any) => {
         ...state,
         deletedNotes:[...deletedNotess]
       }
+    case UNARCHIVE_NOTE:{
+      return{
+        ...state,
+        archivedNotes:[...action.payload.archives],
+        allNotes:[...action.payload.notes]
+      }
+    }
     case "A":
       return state;
     default:
