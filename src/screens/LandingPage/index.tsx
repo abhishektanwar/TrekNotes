@@ -9,7 +9,7 @@ const LandingPage: React.FC = () => {
   const { setAuthType, logoutHandler, user } = useAuth();
   const { showModal } = useModal();
   return (
-    <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
+    <div className="landing-page-container">
       <div className="grid-2-column-layout margin-top-60">
         <div className="horizontal-card flex-align-item-center flex-justify-content-center">
           <div className="text-container">
@@ -44,14 +44,13 @@ const LandingPage: React.FC = () => {
         </div>
       </div>
       <div
-        className="flex-row margin-top-60"
-        style={{ justifyContent: "space-between" }}
+        className="flex-row margin-top-60 flex-justify-content-space-between"
       >
         {contentData.map((data) => {
           return (
-            <div style={{ margin: "20px",maxWidth:'400px' }}>
+            <div className="landing-page-features-container">
               <h3 className="text-medium-weight">{data.heading}</h3>
-              <p className="typo-sm" style={{color:'black'}}>{data.content}</p>
+              <p className="typo-sm" >{data.content}</p>
             </div>
           );
         })}

@@ -5,12 +5,11 @@ import { ReactComponent as ColorPaletteIcon } from "../../assets/icons/ColorPale
 import { ReactComponent as ArchiveIcon } from "../../assets/icons/Archive.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/Delete.svg";
 import { ReactComponent as EditNoteIcon } from "../../assets/icons/EditNote.svg";
-
-import "./note.css";
 import AddColorComponent from "../NewNote/AddColorComponent";
 import { useNotes } from "../../contexts/NotesContext";
 import useNotesApiCalls from "../../hooks/useNotesApiCalls";
 import { dispatchActionTypes } from "../../reducers/dispatchActionTypes";
+import "./note.css";
 
 interface NoteType {
   noteTitle: string;
@@ -25,16 +24,9 @@ interface NoteType {
 const Note: FC<NoteType> = (note) => {
   const { noteTitle, text, id, priority, labels, bgColor, date } = note;
   const [showAddColorComponent, setShowAddColorComponent] = useState(false);
-  const {
-    handleNoteDetailUpdate,
-    handleNoteEdit,
-    notesDispatch,
-    handleEditNote,
-    editNote,
-    setEditNote,
-  } = useNotes();
+  const { notesDispatch, handleEditNote, setEditNote } = useNotes();
   const { updateNote, deleteNote, archiveNote } = useNotesApiCalls();
-  const { DELETE_NOTE, ARCHIVE_NOTE } = dispatchActionTypes;
+  const { DELETE_NOTE } = dispatchActionTypes;
   const handleUpdateNoteColor = async (bgColor: string) => {
     const resp = await updateNote(note.id, {
       note: {
@@ -101,10 +93,7 @@ const Note: FC<NoteType> = (note) => {
           </span>
         </div>
         <div className="meta-data flex-row flex-align-item-center">
-          <div
-            className="flex-row flex-align-item-center"
-            style={{ paddingRight: "10px" }}
-          >
+          <div className="flex-row flex-align-item-center priority-container">
             <PriorityIcon />
             <p className="body-typo-sm text-medium-weight">:{priority}</p>
           </div>
@@ -114,11 +103,9 @@ const Note: FC<NoteType> = (note) => {
               :{new Date(date).toLocaleDateString()}
             </p>
           </div>
-          <span style={{ marginLeft: "6px", marginRight: "6px" }}>|</span>
+          <span className="meta-data-separator">|</span>
           {labels[0] !== undefined ? (
-            <p className="body-typo-sm" style={{ marginRight: "6px" }}>
-              {labels[0]}
-            </p>
+            <p className="body-typo-sm">{labels[0]}</p>
           ) : null}
           {labels[1] !== undefined ? (
             <p className="body-typo-sm">{labels[1]}</p>

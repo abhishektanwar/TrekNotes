@@ -1,11 +1,9 @@
 .note-container{
-  width: 280px;
-  min-height: 300px;
-  border-radius: 20px;
-  margin: 20px;
-  padding-top:10px ;
-  padding-left:10px ;
-  padding-right:10px ;
+  width: 28rem;
+  min-height: 30rem;
+  border-radius: 2rem;
+  margin: 2rem;
+  padding:10px 10px 0 10px
 
 }
 
@@ -32,4 +30,17 @@
   border-top: 2px solid var(--light-border-color);
   padding: 10px;
   justify-content: flex-end;
+}
+
+.priority-container{
+  padding-right: 1rem;
+}
+
+.meta-data-separator{
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.meta-data-separator + p{
+  margin-right: 6px;
 }

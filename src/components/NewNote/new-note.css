@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+.utility-action-btns-left{
+  position: relative;
+}
+
 .form-field{
   width: unset;
 }
@@ -69,4 +73,44 @@
   border-radius: 5px;
   padding-left: 4px;
   margin-right: 4px;
+}
+
+.filter-btn{
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.date-holder{
+  margin-left: 1rem;
+}
+
+/* add label component */
+.add-label-container{
+  position: absolute;
+  display: flex;
+  border: 1px solid black;
+  left: 20px;
+  padding: 10px;
+  top:36px
+}
+
+/* add color component */
+.add-color-container{
+  position: absolute;
+  border: 1px solid black;
+  height: 10rem;
+  width: 12rem;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  top:3.6rem;
+}
+
+.color{
+  border: 1px solid white;
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+  margin: auto;
 }

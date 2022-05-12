@@ -18,14 +18,13 @@ const Filter: FC = () => {
   } = dispatchActionTypes;
   return (
     <>
-      {true ? (
+      {showFilter ? (
         <div className="">
           <div className="filter-main-container flex-row flex-justify-content-space-between">
             <div className="flex-align-item-center filter flex-row">
               <label
                 htmlFor="priority"
-                className={"typo-xs"}
-                style={{ paddingRight: "10px" }}
+                className="typo-xs filter-category-label"
               >
                 Priority
               </label>
@@ -48,8 +47,7 @@ const Filter: FC = () => {
             <div className="flex-align-item-center filter flex-row">
               <label
                 htmlFor="date"
-                className={"typo-xs"}
-                style={{ paddingRight: "10px" }}
+                className="typo-xs filter-category-label"
               >
                 Date
               </label>
@@ -63,7 +61,6 @@ const Filter: FC = () => {
                 id="date"
                 name="date"
               >
-                {/* <option value="all">All</option> */}
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
               </select>
@@ -72,8 +69,7 @@ const Filter: FC = () => {
             <div className="flex-align-item-center filter flex-row">
               <label
                 htmlFor="priority"
-                className={"typo-xs"}
-                style={{ paddingRight: "10px" }}
+                className="typo-xs filter-category-label"
               >
                 Label
               </label>

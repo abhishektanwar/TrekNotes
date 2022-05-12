@@ -2,7 +2,7 @@ import { FC } from "react";
 
 interface AddColorComponentType {
   handleNoteDetailUpdate?: (id: string, value: any) => void;
-  handleFn?:(x:string)=>void,
+  handleFn?: (x: string) => void;
   setShowAddColorComponent: (prev: boolean) => void;
 }
 
@@ -12,82 +12,53 @@ const AddColorComponent: FC<AddColorComponentType> = ({
   setShowAddColorComponent,
 }) => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        border: "1px solid black",
-        height: "100px",
-        width: "120px",
-        zIndex: 10,
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "flex-start",
-        top: "36px",
-      }}
-    >
+    <div className="add-color-container">
       <div
+        className="color"
         style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "green",
-          margin: "auto",
+          backgroundColor: "#38975d",
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate?.("noteBgColor", "green");
+          handleNoteDetailUpdate?.("noteBgColor", "#38975d");
           setShowAddColorComponent(false);
-          handleFn?.("green")
+          handleFn?.("green");
         }}
       ></div>
       <div
+        className="color"
         style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "pink",
-          margin: "auto",
+          backgroundColor: "#d366c4",
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate?.("noteBgColor", "pink");
+          handleNoteDetailUpdate?.("noteBgColor", "#d366c4");
           setShowAddColorComponent(false);
-          handleFn?.("pink")
+          handleFn?.("pink");
         }}
       />
       <div
+        className="color"
         style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "blue",
-          margin: "auto",
+          backgroundColor: "#66d3cd",
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate?.("noteBgColor", "blue");
+          handleNoteDetailUpdate?.("noteBgColor", "#66d3cd");
           setShowAddColorComponent(false);
-          handleFn?.("blue")
-
+          handleFn?.("blue");
         }}
       />
       <div
+        className="color"
         style={{
-          border: "1px solid white",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
-          backgroundColor: "yellow",
-          margin: "auto",
+          backgroundColor: "#dad760",
         }}
         id="noteBgColor"
         onClick={(e) => {
-          handleNoteDetailUpdate?.("noteBgColor", "yellow");
+          handleNoteDetailUpdate?.("noteBgColor", "#dad760");
           setShowAddColorComponent(false);
-          handleFn?.("yellow")
+          handleFn?.("yellow");
         }}
       />
     </div>

@@ -13,16 +13,7 @@ const AddLabelComponent: FC<AddLabelComponentType> = ({
 }) => {
   const [newNoteLabel, setNewNoteLabel] = useState("");
   return (
-    <div
-      style={{
-        position: "absolute",
-        display: "flex",
-        border: "1px solid black",
-        left: "20px",
-        padding: "10px",
-        top:"36px"
-      }}
-    >
+    <div className="add-label-container" >
       <InputField
         type="text"
         id="labels"

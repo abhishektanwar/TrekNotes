@@ -101,7 +101,7 @@ const NewNote: FC = () => {
           setEditNote(false);
           customToast("Note updated", "success");
         }
-    }
+      }
       setIsAddNoteLoading(false);
     }
   };
@@ -121,7 +121,7 @@ const NewNote: FC = () => {
           backgroundColor: newNote.noteBgColor,
         }}
       >
-        <div style={{ display: "flex" }}>
+        <div className="flex-row">
           <InputField
             type="text"
             name="noteTitle"
@@ -137,7 +137,7 @@ const NewNote: FC = () => {
             autoFocus={true}
           />
           <span
-            style={{ marginTop: "7px", cursor: "pointer" }}
+            className="filter-btn"
             onClick={() => toggleFilterVisibility()}
           >
             <FilterIcon />
@@ -154,7 +154,6 @@ const NewNote: FC = () => {
         <div className="new-note-utility-action-btns">
           <div
             className="utility-action-btns-left flex-row flex-align-item-center"
-            style={{ position: "relative" }}
           >
             {showAddColorComponent && (
               <AddColorComponent
@@ -187,7 +186,7 @@ const NewNote: FC = () => {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            <p className="body-typo-sm" style={{ marginLeft: "10px" }}>
+            <p className="body-typo-sm date-holder"> 
               {new Date(newNote.date).toLocaleDateString()}
             </p>
             <ul className="label-main-container">
