@@ -66,6 +66,7 @@ const AuthProvider = (props: any) => {
         });
         customToast("Signed up successfully", "success");
         utils.setLocalStorage("trek-notes-authToken", result.data.encodedToken);
+        navigate("/home");
         return true;
       }
     } catch (e) {
