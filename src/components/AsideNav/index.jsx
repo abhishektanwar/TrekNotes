@@ -31,60 +31,36 @@ const AsideNav = ({open,setOpen}) => {
       ):null}
         <Button
           buttonText="Notes"
-          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/explore' ? 'active-nav' : ''}`}
+          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/home' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
               {/* <Explore /> */}
             </span>
           }
-          onClick={() => navigate("/explore")}
+          onClick={() => navigate("/home")}
         />
         <Button
-          buttonText="Label"
-          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/liked-videos' ? 'active-nav' : ''}`}
-          icon={
-            <span style={{ marginRight: "1rem" }}>
-              {/* <Like /> */}
-            </span>
-          }
-          onClick={() => {
-            user.isAuthenticated ? navigate("/liked-videos") : handleLogin();
-          }}
-        />
-        <Button
-          buttonText="Archive"
-          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/playlists' ? 'active-nav' : ''}`}
+          buttonText="Archived Notes"
+          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/archived-notes' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
               {/* <PlaylistAddCheck /> */}
             </span>
           }
           onClick={() => {
-            user.isAuthenticated ? navigate("/playlists") : handleLogin();
+            user.isAuthenticated ? navigate("/archived-notes") : handleLogin();
           }}
         />
         <Button
-          buttonText="Trash"
-          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/watch-later' ? 'active-nav' : ''}`}
+          buttonText="Deleted Notes"
+          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/deleted-notes' ? 'active-nav' : ''}`}
           icon={
             <span style={{ marginRight: "1rem" }}>
               {/* <WatchLater /> */}
             </span>
           }
           onClick={() => {
-            user.isAuthenticated ? navigate("/watch-later") : handleLogin();
-          }}
-        />
-        <Button
-          buttonText="Profile"
-          buttonStyle={`aside-nav-item body-typo-md text-medium-weight secondary-button ${currentLocation==='/history' ? 'active-nav' : ''}`}
-          icon={
-            <span style={{ marginRight: "1rem" }}>
-              {/* <History /> */}
-            </span>
-          }
-          onClick={() => {
-            user.isAuthenticated ? navigate("/history") : handleLogin();
+            user.isAuthenticated ? navigate("/deleted-notes") : handleLogin();
           }}
         />
     </div>
