@@ -12,11 +12,11 @@
 
 ---
 
-## Live Website : [Trek Flix](https://treknotes.netlify.app/)
+## Live Website : [Trek Notes](https://treknotes.netlify.app/)
 
 ---
 
-## Video Demo : [Trek Flix](https://treknotes.netlify.app/)
+## Video Demo : [Trek Notes](https://treknotes.netlify.app/)
 
 https://user-images.githubusercontent.com/40486188/169534250-24e48c07-af9f-4d4c-9fa2-1044cf8b1d67.mp4
 
