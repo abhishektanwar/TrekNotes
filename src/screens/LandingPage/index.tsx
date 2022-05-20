@@ -4,8 +4,11 @@ import utils from "../../utils";
 import { contentData } from "./data";
 import {useAuth} from '../../contexts/AuthDialogContext'
 import {useModal} from '../../contexts/ModalContext'
+import { useDocumentTitle } from "../../helpers/helper";
 
 const LandingPage: React.FC = () => {
+  useDocumentTitle('TrekNotes')
+
   const { setAuthType, logoutHandler, user } = useAuth();
   const { showModal } = useModal();
   return (

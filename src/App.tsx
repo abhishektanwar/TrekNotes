@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
 import DeletedNotes from "./screens/DeletedNotes";
 import ArchivedNotes from "./screens/ArchivedNotes";
+import Page404 from "./screens/Page404";
 
 const App: FC = () => {
   const [open, setOpen] = useState(false);
@@ -22,20 +23,21 @@ const App: FC = () => {
     <div className="App">
       <ToastContainer theme="colored" autoClose={1200} />
       {/* <Mockman /> */}
-        <nav className="nav-bar shadow-box" id="my-nav-bar">
-          <Header />
-        </nav>
-        <div className={user.isAuthenticated ? "main-container" : ""}>
-          {user?.isAuthenticated && <AsideNav open={open} setOpen={setOpen} />}
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/home" element={<HomePage /> } />
-              <Route path="/deleted-notes" element={<DeletedNotes /> } />
-              <Route path="/archived-notes" element={<ArchivedNotes /> } />
-            </Route>
-          </Routes>
-        </div>
+      <nav className="nav-bar shadow-box" id="my-nav-bar">
+        <Header />
+      </nav>
+      <div className={user.isAuthenticated ? "main-container" : ""}>
+        {user?.isAuthenticated && <AsideNav open={open} setOpen={setOpen} />}
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/deleted-notes" element={<DeletedNotes />} />
+            <Route path="/archived-notes" element={<ArchivedNotes />} />
+          </Route>
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </div>
     </div>
   );
 };

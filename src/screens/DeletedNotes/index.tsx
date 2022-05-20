@@ -1,8 +1,11 @@
 import { FC } from "react";
 import Note from "../../components/Note";
 import { NoteType, useNotes } from "../../contexts/NotesContext";
+import { useDocumentTitle } from "../../helpers/helper";
 
 const DeletedNotes: FC = () => {
+  useDocumentTitle('TrekNotes | Deleted Notes')
+
   const {
     notesData: { deletedNotes },
   } = useNotes();

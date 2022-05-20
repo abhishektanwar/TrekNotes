@@ -1,8 +1,10 @@
 import { FC } from 'react'
 import Note from '../../components/Note';
 import { useNotes } from '../../contexts/NotesContext';
+import { useDocumentTitle } from '../../helpers/helper';
 
 const ArchivedNotes:FC = () => {
+  useDocumentTitle('TrekNotes | Archived Notes')
   const {notesData:{archivedNotes}} = useNotes()
   return (
     <div>

@@ -5,10 +5,13 @@ import NewNote from "../../components/NewNote";
 import Note from "../../components/Note";
 import { useNotesFilter } from "../../contexts/FilterContext";
 import { NoteType, useNotes } from "../../contexts/NotesContext";
+import { useDocumentTitle } from "../../helpers/helper";
 import getFilteredNotes from "../../utils/FilterNotes/mainFilter";
 import "./home-page.css";
 
 const HomePage: FC = () => {
+  useDocumentTitle('TrekNotes | Home')
+
   const {
     notesData: { allNotes, archivedNotes },
     isFetchingNotes,
